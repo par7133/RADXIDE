@@ -1,2 +1,2 @@
 # RADXIDE
-One more IDE but for RAD - Tcl-Tk &lt;= 8.6
+One more IDE but thought for RAD - Tcl-Tk &lt;= 8.6
