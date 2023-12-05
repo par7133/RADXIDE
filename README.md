@@ -17,10 +17,9 @@ file[php].inc:<br>
 #Example of PHP code<br>
 phpinfo();<br>
 <br>
-Starting file and most of code 
-here presented and distributed contain excerpts 
-from [alited](https://github.com/aplsimple/alited
-by Alex Plotnikov and contributors to the project.
+RADXIDE and most of code here presented and distributed contain excerpts 
+from [alited](https://github.com/aplsimple/alited by Alex Plotnikov and 
+contributors to the project.
 The original code of these excerpts could be 
 borrowed from other sources which the author
 and the contributors to this RadXIDE have no 
