@@ -9,11 +9,12 @@ The Code Libray needs the folder $dan(WORKDIR)/.examples
 eg: /home/YourUser/.radxwork/.examples and must filled 
 with your examples files tagged with one [tag] on their 
 names. And containg a first line of #comment to give a 
-the menu a descriptive nomenclature:
-
-file[php].inc:
-#Example of PHP code
-
+the menu a descriptive nomenclature:<br>
+<br>
+file[php].inc:<br>
+#Example of PHP code<br>
+phpinfo()<br>
+<br>
 Starting file and most of code 
 here presented and distributed contain excerpts 
 from [alited](https://github.com/aplsimple/alited
