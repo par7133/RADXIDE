@@ -13,7 +13,7 @@ the menu a descriptive nomenclature:<br>
 <br>
 file[php].inc:<br>
 #Example of PHP code<br>
-phpinfo()<br>
+phpinfo();<br>
 <br>
 Starting file and most of code 
 here presented and distributed contain excerpts 
