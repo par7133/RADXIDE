@@ -38,4 +38,8 @@ License: MIT.<br>
 Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
 Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
 
+<br><br>
+
+##Screenshots:
+
 ![RADXIDE in action #1](/res/screenshot1.png)<br>
