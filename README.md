@@ -5,7 +5,7 @@ The software check for the existance of the Working Dir
 in /home/YourUser/.radxwork and must configured for this 
 in radxide.tcl, variable dan(WORKDIR).
 
-The "Code Libray" of the window right pane needs the 
+The "Code Library" of the window right pane needs the 
 folder $dan(WORKDIR)/.examples eg:<br> 
 <br> 
 /home/YourUser/.radxwork/.examples<br><br>
@@ -37,3 +37,5 @@ refer <eglib.tcl> part of this software.
 License: MIT.<br>
 Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
 Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
+
+![RADXIDE in action #1](/res/screenshot1.png)<br>
