@@ -55,7 +55,7 @@ namespace eval radxide {
   set DEBUG no  ;# debug mode
   
   set dan(WIN) .danwin              ;# main form
-  set dan(WORKDIR) "/home/pocahontas/.radxwork"  ;# root working dir
+  set dan(WORKDIR) "/home/YouUser/.radxwork"  ;# root working dir
   set dan(TITLE) RADXIDE
   
   # Check workdir existance..
