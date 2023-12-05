@@ -5,11 +5,13 @@ The software check for the existance of the Working Dir
 in /home/YourUser/.radxwork and must configured for this 
 in radxide.tcl, variable dan(WORKDIR).
 
-The Code Libray needs the folder $dan(WORKDIR)/.examples
-eg: /home/YourUser/.radxwork/.examples and must filled 
-with your examples files tagged with one [tag] on their 
-names. And containg a first line of #comment to give a 
-the menu a descriptive nomenclature:<br>
+The "Code Libray" of the window right pane needs the 
+folder $dan(WORKDIR)/.examples eg:<br> 
+<br> 
+/home/YourUser/.radxwork/.examples<br> 
+and must be filled with your examples files tagged with 
+one [tag] on their names. And containg a first line of 
+#comment to give a the menu a descriptive nomenclature:<br>
 <br>
 file[php].inc:<br>
 #Example of PHP code<br>
