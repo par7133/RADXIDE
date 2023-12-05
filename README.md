@@ -8,7 +8,7 @@ in radxide.tcl, variable dan(WORKDIR).
 The "Code Libray" of the window right pane needs the 
 folder $dan(WORKDIR)/.examples eg:<br> 
 <br> 
-/home/YourUser/.radxwork/.examples<br> 
+/home/YourUser/.radxwork/.examples<br><br>
 and must be filled with your examples files tagged with 
 one [tag] on their names. And containg a first line of 
 #comment to give a the menu a descriptive nomenclature:<br>
