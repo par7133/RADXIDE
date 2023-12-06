@@ -1,9 +1,9 @@
 # RADXIDE
 One more IDE but thought for RAD - Tcl-Tk &lt;= 8.6
 
-
+<br><br>
 Originally envisioned for RAD development in PHP...
-
+<br><br>
 The software check for the existance of the Working Dir
 in /home/YourUser/.radxwork and must configured for this 
 in radxide.tcl, variable dan(WORKDIR).
