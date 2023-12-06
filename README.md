@@ -38,6 +38,8 @@ refer <eglib.tcl> part of this software.
 
 License: MIT.<br>
 Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
+
+Feedback: posta@elettronica.lol
 Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
 
 <br><br>
