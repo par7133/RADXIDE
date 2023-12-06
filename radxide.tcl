@@ -131,12 +131,18 @@ namespace eval radxide {
   set icons(PUBLICF-ICONI) [image create photo imgobj3 -file $icons(PUBLICF-ICON)]
   set icons(PRIVATEF-ICON) "icons/private-folder.png"
   set icons(PRIVATEF-ICONI) [image create photo imgobj4 -file $icons(PRIVATEF-ICON)]
+  set icons(HTML-ICON) "icons/file-html.png"
+  set icons(HTML-ICONI) [image create photo imgobj5 -file $icons(HTML-ICON)]
+  set icons(JS-ICON) "icons/file-js.png"
+  set icons(JS-ICONI) [image create photo imgobj6 -file $icons(JS-ICON)]  
   set icons(PHP-ICON) "icons/file-php.png"
-  set icons(PHP-ICONI) [image create photo imgobj5 -file $icons(PHP-ICON)]
+  set icons(PHP-ICONI) [image create photo imgobj7 -file $icons(PHP-ICON)]
+  set icons(TXT-ICON) "icons/file-txt.png"
+  set icons(TXT-ICONI) [image create photo imgobj8 -file $icons(TXT-ICON)]
   set icons(GENERIC-FILE-ICON) "icons/file-generic.png"
-  set icons(GENERIC-FILE-ICONI) [image create photo imgobj6 -file $icons(GENERIC-FILE-ICON)]
+  set icons(GENERIC-FILE-ICONI) [image create photo imgobj9 -file $icons(GENERIC-FILE-ICON)]
   set icons(FOLDER-ICON) "icons/folder.png"
-  set icons(FOLDER-ICONI) [image create photo imgobj7 -file $icons(FOLDER-ICON)]
+  set icons(FOLDER-ICONI) [image create photo imgobj10 -file $icons(FOLDER-ICON)]
   
   # Menu variables
   set menu(ROOT) "";
@@ -150,7 +156,10 @@ namespace eval radxide {
   set menu(CUT_ENTRY_IDX) 2;
   set menu(FIND_ENTRY_IDX) 4;    
     
-  set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny}     ;# extensions of Php files
+  set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny}     ;# extensions of php files
+  set dan(HtmlExts) {.html .htm}                             ;# extensions of html files
+  set dan(JsExts) {.js}                                      ;# extensions of js files
+  set dan(TxtExts) {.txt .rtf}                               ;# extensions of txt files
      
 # __________________ iswindows ___________________ #
 

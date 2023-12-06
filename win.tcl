@@ -133,7 +133,7 @@ namespace eval win {
     set com [getOption -com {*}$attrs]
     if {[string is integer -strict $com]} {
       extractOptions attrs -com {}
-      append attrs " -com {[self] res {} $com}" ;# returned integer result
+      append attrs " -com {::radxide::win::res {} $com}" ;# returned integer result
     }
     if {[getOption -image {*}$attrs] ne {}} return
     set txt [getOption -t {*}$attrs]
@@ -2512,7 +2512,7 @@ namespace eval win {
     # add the buttons
     
     # xxx
-    if {$dlgname eq "RenameFile" || $dlgname eq "Find"} {
+    if {$dlgname eq "RenameFile" || $dlgname eq "RenameFolder" || $dlgname eq "Find"} {
       set buttons [string map {"butOK OK 1" "" "butCANCEL Cancel destroy" ""} $buttons]
     }
     lassign [AppendButtons widlist $buttons h__ L $defb $timeout $qdlg $modal] \
@@ -2753,7 +2753,7 @@ namespace eval win {
 			return 0 
     }
     
-	  # savind {field oldval newval} for later use
+	  # saving {field oldval newval} for later use
 	  editDialogField end $varname $oldpath $newpath
 
     ::radxide::tree::create
@@ -2774,6 +2774,84 @@ namespace eval win {
   proc renameFileCancel {} {
   
     #catch {[destroy .danwin.diaRenameFile1]}    
+    catch {[destroy [dlgPath]]}
+        
+    return 0
+  }
+
+# ________________________ renameFolderOK _________________________ #
+
+
+  proc renameFolderOK {} {
+  
+    namespace upvar ::radxide dan dan project project
+
+    variable dlg
+    
+    #set t $Dlgpath.fra.fraM.fraent.ent
+    set t [dlgPath].fra.[FieldName [lindex [getDialogField 0] 0]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message textbox=$t
+    set varname [lindex [getDialogField end] 0]
+    #tk_messageBox -title $dan(TITLE) -icon info -message varname=$varname
+    set oldpath [lindex [getDialogField end] 1]
+    #tk_messageBox -title $dan(TITLE) -icon info -message oldpath=$oldpath
+    set newpath [string trim [$t get]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message newpath=$newpath
+    set oldparent [string range $oldpath 0 [expr [string last "/" $oldpath]-1]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message oldparent=$oldparent
+    set newparent [string range $newpath 0 [expr [string last "/" $newpath]-1]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message newparent=$newparent
+    
+    set pathlength [expr [string length $newpath]-1] 
+    if {[string range $newpath $pathlength $pathlength] eq "/"} {
+      tk_messageBox -title $dan(TITLE) -icon info -message "Please delete the final '\/'!"
+      return 0
+    }
+
+    if {[string first $dan(WORKDIR) $newpath] eq -1} {
+      tk_messageBox -title $dan(TITLE) -icon info -message "New file path outside the Working Dir!"
+      return 0
+    }
+
+    if {[string first $project(ROOT) $newpath] eq -1} {
+      tk_messageBox -title $dan(TITLE) -icon info -message "New file path outside the Project Dir!"
+      return 0
+    }
+    
+    if {$oldparent ne $newparent} {
+      tk_messageBox -title $dan(TITLE) -icon info -message "Change of parent folder disallowed!"
+      return 0   
+    }
+    
+    if {[catch {file rename $oldpath $newpath} e]} {
+			set msg "\nERROR in win:"
+			puts \n$msg\n\n$e$::errorInfo\n
+			set msg "$msg\n\n$e\n\nPlease, inform authors.\nDetails are in stdout."
+			tk_messageBox -title $dan(TITLE) -icon error -message $msg  
+			return 0 
+    }
+    
+	  # savind {field oldval newval} for later use
+	  editDialogField end $varname $oldpath $newpath
+
+    ::radxide::tree::create
+    
+    # Workaround for an overwheling activation of the main text editor..
+    if {$project(CUR_FILE_PATH) eq ""} {
+      $dan(TEXT) configure -state disabled
+    }
+        
+    catch {destroy [dlgPath]}
+
+    return 1
+  }
+
+# ________________________ renameFolderCancel _________________________ #
+
+
+  proc renameFolderCancel {} {
+  
+    #catch {[destroy .danwin.diaRenameFolder1]}    
     catch {[destroy [dlgPath]]}
         
     return 0

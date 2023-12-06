@@ -20,12 +20,12 @@
 
 namespace eval tree {
 
-# ________________________ AddItem _________________________ #
+# ________________________ addFile _________________________ #
 
 
 	proc addFile {{ID ""}} {
 		# Adds a new item to the tree.
-		#   ID - an item's ID where the new item will be added (for the file tree).
+		#   ID - an item's ID where the new file will be added (for the file tree).
 
 		namespace upvar ::radxide dan dan
 
@@ -45,6 +45,33 @@ namespace eval tree {
     }  
 
 	}
+
+# ________________________ addFolder _________________________ #
+
+
+	proc addFolder {{ID ""}} {
+		# Adds a new item to the tree.
+		#   ID - an item's ID where the new folder will be added (for the file tree).
+
+		namespace upvar ::radxide dan dan
+
+    set tree $dan(TREEVIEW)
+    lassign [$tree item $ID -values] -> fname isfile
+    set parentfolder $fname
+    
+    if {!$isfile} {
+    
+      #tk_messageBox -title $dan(TITLE) -icon error -message $parentfolder
+        
+      ::radxide::filelib::createFolder $parentfolder
+      
+      # Refreshing TreeView
+      ::radxide::tree::create
+      
+    }  
+
+	}
+
 
 # ________________________ addTags _________________________ #
 
@@ -266,8 +293,14 @@ namespace eval tree {
 		      continue
 		    } 
 		  
-		    if {[isPhp $fname]} {
+		    if {[isHtml $fname]} {
+		      set imgopt $icons(HTML-ICONI)
+		    } elseif {[isJs $fname]} {
+		      set imgopt $icons(JS-ICONI)		      
+		    } elseif {[isPhp $fname]} {
 		      set imgopt $icons(PHP-ICONI)
+		    } elseif {[isTxt $fname]} {
+		      set imgopt $icons(TXT-ICONI)		      		      
 		    } else {
 		      set imgopt $icons(GENERIC-FILE-ICONI)
 		    }
@@ -496,6 +529,30 @@ namespace eval tree {
 		return [expr {[lsearch -exact $dan(_dirignore) $dir]>-1}]
 	}
 
+# ________________________ isHtml _________________________ #
+
+	proc isHtml {fname} {
+		# Checks if a file is of Html.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(HtmlExts)} {
+		  return yes
+		}
+		return no
+	}
+
+# ________________________ isJs _________________________ #
+
+	proc isJs {fname} {
+		# Checks if a file is of JS.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(JsExts)} {
+		  return yes
+		}
+		return no
+	}
+
 # ________________________ isPhp _________________________ #
 
 	proc isPhp {fname} {
@@ -503,6 +560,18 @@ namespace eval tree {
 		#   fname - file name
 
 		if {[string tolower [file extension $fname]] in $radxide::dan(PhpExts)} {
+		  return yes
+		}
+		return no
+	}
+
+# ________________________ isTxt _________________________ #
+
+	proc isTxt {fname} {
+		# Checks if a file is of Txt.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(TxtExts)} {
 		  return yes
 		}
 		return no
@@ -637,10 +706,35 @@ namespace eval tree {
       ent "{} {} {-w 64}" "{$fname}"] \
       -head "File name:" {*}$args] res}
   
-    #tk_messageBox -title $dan(TITLE) -icon error -message $res
-    #tk_messageBox -title $dan(TITLE) -icon error -message $name2
-  
   }
+  
+# ________________________ renameFolder _________________________ #
+
+
+  proc renameFolder {{ID ""}} {
+  
+    namespace upvar ::radxide dan dan
+  
+    set tree $dan(TREEVIEW)
+    set args {}
+    set name2 ""
+    
+		if {$ID eq {}} {
+		  if {[set ID [$tree selection]] eq {}} return
+		}
+		lassign [$tree item $ID -values] -> fname isfile 
+  
+    # lassign [::radxide::win::input {} "Rename file" [list \
+    #   ent "{} {} {-w 32}" "{$fname}"] \
+    #   -head "File name:" res name2]
+    
+    set args "-buttons {butOK OK ::radxide::win::renameFolderOK butCANCEL CANCEL ::radxide::win::renameFolderCancel}"
+       
+    catch {lassign [::radxide::win::input "RenameFolder" {} "Rename folder" [list \
+      ent "{} {} {-w 64}" "{$fname}"] \
+      -head "Folder name:" {*}$args] res}
+  
+  }  
 
 # ________________________ showPopupMenu _________________________ #
 
@@ -665,10 +759,11 @@ namespace eval tree {
 		
 		set m1 "Refresh project"
 		set m2 "Add file"
+		set m2f "Add folder"
 		set m3 "Rename file"
 		set m4 "Delete file"
-		set m3b "Rename folder"
-		set m4b "Delete folder"
+		set m3f "Rename folder"
+		set m4f "Delete folder"
 		set m5 "Open file" 
 		set m6 "Open dir"  
 		
@@ -683,12 +778,13 @@ namespace eval tree {
   		$popm add command -label $m3 -command "::radxide::tree::renameFile $ID"
 	  	$popm add command -label $m4 -command "::radxide::tree::deleteFile $ID" 
 	  } else {
+	    $popm add command -label $m2f -command "::radxide::tree::addFolder $ID"
   		if {($fname eq "$project(ROOT)/Public") || ($fname eq "$project(ROOT)/Private")} {
-	  		$popm add command -label $m3b -command "::radxide::tree::renameFolder $ID" -state disabled
-  	  	$popm add command -label $m4b -command "::radxide::tree::delFolder $ID" -state disabled
+	  		$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state disabled
+  	  	$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
   	  } else {
-	  		$popm add command -label $m3b -command "::radxide::tree::renameFolder $ID" -state normal
-  	  	$popm add command -label $m4b -command "::radxide::tree::delFolder $ID" -state normal
+	  		$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state normal
+  	  	$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
       }  	  	
 	  }	
 		$popm add separator

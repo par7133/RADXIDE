@@ -37,9 +37,7 @@ namespace eval filelib {
 		
 		if {$destfolder ne ""} {
 		
-		  #tk_messageBox -title $dan(TITLE) -icon error -message "Yess!"
-		
-		  set num 1
+  	  set num 1
 		  while {[file exists $destfolder/$n$num]} {  
 		    incr num
 		  }
@@ -52,6 +50,37 @@ namespace eval filelib {
 		  set stxt ""
 		  puts $fh $stxt
 		  close $fh		
+		}
+	}
+
+
+# __________________________ createFile _________________________ #
+
+
+	proc createFolder {{parentfolder ""}} {
+		# Create a file.
+		#   fname - file name
+		#   stxt - text to save
+
+		namespace upvar ::radxide dan dan project project
+		
+		set n "newfolder"
+		
+		#tk_messageBox -title $dan(TITLE) -icon error -message $parentfolder
+		
+		if {$parentfolder ne ""} {
+		
+		  set num 1
+		  while {[file exists $parentfolder/$n$num]} {  
+		    incr num
+		  }
+
+		  #tk_messageBox -title $dan(TITLE) -icon error -message $parentfolder/$n$num	
+		  
+		  set fname $parentfolder/$n$num
+		
+      file mkdir $fname 
+		  
 		}
 	}
 
