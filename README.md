@@ -1,6 +1,7 @@
 # RADXIDE
 One more IDE but thought for RAD - Tcl-Tk &lt;= 8.6
 
+
 Originally envisioned for RAD development in PHP...
 
 The software check for the existance of the Working Dir
@@ -19,7 +20,7 @@ one [tag] on their names. And containg a first line of
 #Example of PHP code<br>
 phpinfo();<br>
 <br>
-RADXIDE and most of code here presented and distributed contain excerpts 
+RADXIDE and most of code here presented and distributed contains excerpts 
 from [alited](https://github.com/aplsimple/alited by Alex Plotnikov and 
 contributors to the project.
 The original code of these excerpts could be 
@@ -28,7 +29,7 @@ and the contributors to this RadXIDE have no
 knowledge about.
 
 Code Library scaffolding and most of its code 
-contain excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
+contains excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
 by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 The original code of these excerpts could be 
 borrowed from other sources which the author
@@ -42,7 +43,7 @@ Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original sca
 
 <br><br>
 
-## Screenshots:
+## Screenshot:
 
 ![RADXIDE in action #1](/res/screenshot1.png)<br><br><br>
 
