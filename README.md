@@ -8,9 +8,9 @@ in /home/YourUser/.radxwork and must configured for this
 in radxide.tcl, variable dan(WORKDIR).
 
 The "Code Library" of the window right pane needs the 
-folder $dan(WORKDIR)/.examples eg:<br> 
+folder $dan(WORKDIR)/.snippets eg:<br> 
 <br> 
-/home/YourUser/.radxwork/.examples<br><br>
+/home/YourUser/.radxwork/.snippets<br><br>
 and must be filled with your examples files tagged with 
 one [tag] on their names. And containg a first line of 
 #comment to give a the menu a descriptive nomenclature:<br>
