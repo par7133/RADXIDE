@@ -25,7 +25,7 @@ from [alited](https://github.com/aplsimple/alited by Alex Plotnikov and
 contributors to the project.
 The original code of these excerpts could be 
 borrowed from other sources which the author
-and the contributors to this RadXIDE have no 
+and the contributors to this RADXIDE have no 
 knowledge about.
 
 Code Library scaffolding and most of its code 
@@ -33,7 +33,7 @@ contains excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
 by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 The original code of these excerpts could be 
 borrowed from other sources which the author
-and the contributors to RadXIDE have no 
+and the contributors to RADXIDE have no 
 knowledge about. For the related copyright notice
 refer to <eglib.tcl> part of this software.
 
