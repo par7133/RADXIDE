@@ -28,13 +28,13 @@ and the contributors to this RadXIDE have no
 knowledge about.
 
 Code Library scaffolding and most of its code 
-from "Practical Programming in Tcl and Tk, 4th Ed."
+contain excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
 by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 The original code of these excerpts could be 
 borrowed from other sources which the author
 and the contributors to RadXIDE have no 
 knowledge about. For the related copyright notice
-refer <eglib.tcl> part of this software.
+refer to <eglib.tcl> part of this software.
 
 License: MIT.<br>
 Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
