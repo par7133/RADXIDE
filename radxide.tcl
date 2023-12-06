@@ -64,8 +64,8 @@ namespace eval radxide {
   }
 
   # Check Code Library dir existance.. (WORKDIR)/.examples)
-  if {![file exists $dan(WORKDIR)/.examples]} {
-    file mkdir $dan(WORKDIR)/.examples
+  if {![file exists $dan(WORKDIR)/.snippets]} {
+    file mkdir $dan(WORKDIR)/.snippets
   }
     
   set dan(TREEVIEW) ""              ;# ide project tree

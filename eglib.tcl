@@ -23,7 +23,7 @@ namespace eval eglib {
   namespace upvar ::radxide dan dan
 
   set browse(list) [list]
-  set browse(dir) $dan(WORKDIR)/.examples
+  set browse(dir) $dan(WORKDIR)/.snippets
 	set browse(curix) -1
 	set browse(current) ""
 	set browse(label) {}
@@ -105,7 +105,7 @@ namespace eval eglib {
 								set chap "Various"
 							}
 							set ex [incr $ex]
-							lappend examples($chap) $ex
+							lappend snippets($chap) $ex
 							lappend browse(list) $fpath
 							# Read example title
 							#gets $in line
@@ -126,14 +126,14 @@ namespace eval eglib {
 		option add *Menu.tearOff 0
 		set limit 8
 		set c 0; set i 0
-		foreach chap [lsort [array names examples]] {
+		foreach chap [lsort [array names snippets]] {
 			$m add cascade -label "$chap..." \
 			-menu $m.$c
 			set sub1(chap) [menu $m.$c]
 			incr c
 			
 			set i [expr ($i +1) % $limit]
-			foreach ex [lsort $examples($chap)] {
+			foreach ex [lsort $snippets($chap)] {
 				$sub1(chap) add command -label $title($chap-$ex) \
 					-command [list ::radxide::eglib::Browse $file($chap-$ex)]	
 			}
