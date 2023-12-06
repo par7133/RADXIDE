@@ -3,7 +3,18 @@
 # Author:  Daniele Bonini  (posta@elettronica.lol)
 # Date:    25/11/2023
 # Desc:    Main form of RadXIDE.
-# License: MIT.
+#
+#          Files namespace and most of code 
+#          here presented and distributed contain excerpts 
+#          from [alited](https://github.com/aplsimple/alited
+#          by Alex Plotnikov and contributors to the project.
+#          The original code of these excerpts could be 
+#          borrowed from other sources which the author
+#          and the contributors to this RadXIDE have no 
+#          knowledge about.
+#
+# License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)
+#               Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
 ###########################################################
 
 
@@ -55,9 +66,10 @@ namespace eval main {
 		wm attributes $dan(WIN) -topmost
 		updateAppTitle
 		wm iconphoto $dan(WIN) $dan(ICONI)
-		wm resizable $dan(WIN) 0 0
+		wm resizable $dan(WIN) 1 1
 		::radxide::win::centerWin $dan(WIN) $dan(WIDTH) $dan(HEIGHT)
-		wm minsize $dan(WIN) $dan(WIDTH) $dan(HEIGHT)
+		wm minsize $dan(WIN) [expr $dan(WIDTH)-600] [expr $dan(HEIGHT)-600]
+		wm maxsize $dan(WIN) [expr $dan(WIDTH)+400] [expr $dan(HEIGHT)+300]
 		wm attributes $dan(WIN) -fullscreen 0
 		wm protocol . WM_DELETE_WINDOW { radxide::quit }
     

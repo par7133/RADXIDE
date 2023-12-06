@@ -52,7 +52,7 @@ namespace eval file {
 	  $t delete 1.0 end
 	  $t insert end ""
 	  $t config -state disabled
-	  ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+	  ::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"
 	  
 		# Update file Menu
 	  $menu(FILE) entryconfigure $menu(SAVE_AS_ENTRY_IDX) -state disabled
@@ -85,7 +85,7 @@ namespace eval file {
 	  $t delete 1.0 end
 	  $t insert end ""
 	  $t config -state disabled
-	  ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+	  ::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"
 	  
 	  # ide treeviee reset
 	  set tree $dan(TREEVIEW)

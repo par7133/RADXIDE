@@ -1862,11 +1862,24 @@ namespace eval win {
 		  # main pane (panR)
 		  pack [set w2 [frame $pan.fra2 -background $bg ]] -side left -fill both -expand 1 ;#-fill both
 		  set panR [$pan add $pan.fra2]
-		  pack [text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5] -side left -fill both -expand 1 -anchor nw
+		  pack [text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5] -side left -fill both -expand 0 -anchor nw
  		  # text pane
 		  #pack [text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -expand 1 -fill both;#-gutterwidth 5 -guttershift 3
-		  pack [text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 155] -side left -expand 1 -fill both -anchor nw;#-gutterwidth 5 -guttershift 3
-		  set dan(TEXT) $w2.text
+		  #pack [text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 155] -side left -expand 1 -fill both -anchor nw;#-gutterwidth 5 -guttershift 3
+		  frame $w2.fra
+		  text $w2.fra.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -xscrollcommand [list $w2.fra.xscroll set] -yscrollcommand [list $w2.fra.yscroll set] -wrap none
+		  scrollbar $w2.fra.xscroll -orient horizontal \
+		    -command [list $w2.fra.text xview]
+		  scrollbar $w2.fra.yscroll -orient vertical \
+		    -command [list $w2.fra.text yview]
+		  grid $w2.fra.text $w2.fra.yscroll -sticky news
+	   	grid $w2.fra.xscroll -sticky news
+		  grid rowconfigure $w2.fra 0 -weight 1
+		  grid columnconfigure $w2.fra 0 -weight 1
+		  pack $w2.fra -side left -expand 1 -fill both -anchor nw;
+		  
+		  set dan(GUTTEXT) $w2.gutText
+		  set dan(TEXT) $w2.fra.text
 		  $dan(TEXT) configure -state disabled
 		  
 		  # code library
@@ -1875,7 +1888,7 @@ namespace eval win {
 		  ::radxide::eglib::create $w3
 		  
 		  # update gutter, key bindings     
-      bind .danwin.fra.pan.fra2.text "<KeyRelease>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"}
+      bind $dan(TEXT) "<KeyRelease>" {::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"}
       bind $tree "<ButtonPress>" {after idle {::radxide::tree::buttonPress %b %x %y %X %Y}}
       bind $tree "<ButtonRelease>" {after idle {::radxide::tree::buttonRelease %b %s %x %y %X %Y}}      
       

@@ -78,15 +78,13 @@ namespace eval filelib {
 		#   reload - if yes, loads the file even if it has a "strange" extension
 		#   islist - if yes, *fnames* is a file list
 		#   Message - name of procedure for "open file" message
-		# Returns the file's tab ID if it's loaded, or {} if not loaded.
-
+    # Return the content of the file
+    
     namespace upvar ::radxide dan dan
 
     set ret ""
 
     if {$fname ne ""} {
-
-      #tk_messageBox -title $dan(TITLE) -icon error -message "Yess!"
 
 		  if {[file size $fname] > $dan(MAXFILESIZE)} {
 		    tk_messageBox -title $dan(TITLE) -icon error -message "File exceed MAXFILESIZE=$dan(MAXFILESIZE)"
@@ -111,42 +109,8 @@ namespace eval filelib {
 		#   stxt - text to save
 
 		namespace upvar ::radxide dan dan project project
-		#if {[info exists al(THIS-ENCODING)]} {
-		#  set enc "-encoding $al(THIS-ENCODING)" ;# at saving "no name"
-		#} else {
-		#  set enc [Encoding $fname]
-		#}
-		#if {[info exists al(THIS-EOL)]} {
-		#  set eol "-translation $al(THIS-EOL)" ;# at saving "no name"
-		#} else {
-		#  set eol [EOL $fname]
-		#}
-		#append enc " $eol"
-		#set al(_NO_OUTWARD_) {}
-		#set wtxt [alited::main::GetWTXT $TID]
-		#if {$al(prjtrailwhite)} {alited::edit::RemoveTrailWhites $TID yes $doit}
-		#set fcont [$wtxt get 1.0 "end - 1 chars"]  ;# last \n excluded
-		#if {![::apave::writeTextFile $fname fcont 0 1 {*}$enc]} {
-		#  alited::msg ok err [::apave::error $fname] -w 50 -text 1
-		#  unset al(_NO_OUTWARD_)
-		#  return 0
-		#}
-		#unset al(_NO_OUTWARD_)
-		#OutwardChange $TID no
-		#alited::edit::BackupFile $TID
-		#if {!$doit} {
-		#  $wtxt edit modified no
-		#  alited::edit::Modified $TID $wtxt
-		#  alited::main::HighlightText $TID $fname $wtxt
-		#  RecreateFileTree
-		#}
-		#return 1
 		
 		if {($fname ne "") && ($stxt ne "")} {
-		
-		  #tk_messageBox -title $dan(TITLE) -icon error -message "Yess!"
-		
-		  #tk_messageBox -title $dan(TITLE) -icon error -message $fname
 		
 		  set fh [open $fname {WRONLY CREAT}]
 		  puts $fh $stxt

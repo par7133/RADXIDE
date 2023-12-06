@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.0.5
+package provide radxide 1.0.6
 
 set _ [package require Tk]
 wm withdraw .
@@ -55,7 +55,7 @@ namespace eval radxide {
   set DEBUG no  ;# debug mode
   
   set dan(WIN) .danwin              ;# main form
-  set dan(WORKDIR) "/home/YouUser/.radxwork"  ;# root working dir
+  set dan(WORKDIR) "/home/YourUser/.radxwork"  ;# root working dir
   set dan(TITLE) RADXIDE
   
   # Check workdir existance..
@@ -69,6 +69,7 @@ namespace eval radxide {
   }
     
   set dan(TREEVIEW) ""              ;# ide project tree
+  set dan(GUTTEXT) ""               ;# ide guttext control 
   set dan(TEXT) ""                  ;# ide text control
   set dan(prjdirignore) {.git .bak} ;# ignored subdirectories of project
   
@@ -104,8 +105,8 @@ namespace eval radxide {
   variable _dirtree [list]
   
   set dan(TITLE_TEMPL) {%f :: %t}   ;# radxide title's template
-  set dan(WIDTH) 1600
-  set dan(HEIGHT) 800
+  set dan(WIDTH) 1280
+  set dan(HEIGHT) 760
   #set al(MOVEFG) "black"
   #set al(MOVEBG) "#7eeeee"  
   set dan(FG) "#000000"

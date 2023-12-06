@@ -27,6 +27,7 @@ namespace eval eglib {
 	set browse(curix) -1
 	set browse(current) ""
 	set browse(label) {}
+	set browse(cookie) ""
 	  
 # ____________________ Scrolled_Text ____________________ #
 
@@ -65,7 +66,7 @@ namespace eval eglib {
 		pack $f -fill x; #-side left -fill both -expand 1 ;#-fill x
 		
 		# Create the menubutton and menu
-		menubutton $f.ex -text Examples -menu $f.ex.m
+		menubutton $f.ex -text Snippets -menu $f.ex.m
 		pack $f.ex -side left
 		set m [menu $f.ex.m]		
 
@@ -74,7 +75,7 @@ namespace eval eglib {
 
 		# The Run and Reset buttons use EvalEcho that
 		# is defined by the Tcl shell in Example 24–4 on page 389
-		button $f.load -text Run -command Run -state disabled
+		button $f.load -text Copy -command ::radxide::eglib::Copy ;#-state disabled
 		button $f.reset -text Reset -command ::radxide::eglib::Reset
 
 		# A label identifies the current example
@@ -154,10 +155,10 @@ namespace eval eglib {
 		if [catch {open $file} in] {
 			$t insert end $in
 		} else {
-			$t insert end [read $in]
+			$t insert end [set browse(cookie) [read $in]]
 			close $in
 		}
-		$t config -state disabled
+		#$t config -state disabled
 	}
 
 # ___________________ Next ____________________ #  
@@ -185,11 +186,11 @@ namespace eval eglib {
 # ___________________ Run ____________________ #
 
 
-	proc Run {} {
+	proc Copy {} {
   # Run the example in the shell
 		variable browse
-		EvalEcho [list source \
-			[file join $browse(dir) $browse(current)]]
+		set t $browse(text)
+    tk_textCopy $t
 	}
 
 # ___________________ Reset ____________________ #
@@ -201,8 +202,11 @@ namespace eval eglib {
 	 	set t $browse(text)
 		$t config -state normal
 		$t delete 1.0 end
-		$t insert end ""
-		$t config -state disabled
+		#Next
+		#Previous
+		#$t insert end ""
+		$t insert end $browse(cookie)
+		#$t config -state disabled
 	}	
 #_______________________	
 	

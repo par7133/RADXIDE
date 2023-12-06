@@ -536,7 +536,7 @@ namespace eval tree {
 		  $dan(TEXT) config -state normal
 		  $dan(TEXT) delete 1.0 end 
 		  $dan(TEXT) insert 1.0 [::radxide::filelib::openFile $fname]
-		  ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+		  ::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"
 			
 		  # Update menu
 	    $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state normal
