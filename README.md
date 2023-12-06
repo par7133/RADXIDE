@@ -13,7 +13,7 @@ folder $dan(WORKDIR)/.snippets eg:<br>
 <br> 
 /home/YourUser/.radxwork/.snippets<br><br>
 and must be filled with your examples files tagged with 
-one [tag] on their names. And containg a first line of 
+one [tag] on their names and containg a first line of 
 #comment to give a the menu a descriptive nomenclature:<br>
 <br>
 ~/.radxwork/.snippets/file[php].inc:<br>
