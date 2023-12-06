@@ -44,6 +44,6 @@ Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original sca
 
 ## Screenshots:
 
-![RADXIDE in action #1](/res/screenshot1.png)<br>
+![RADXIDE in action #1](/res/screenshot1.png)<br><br><br>
 
 Feedback: <a href="mailto:posta@elettronica.lol">posta@elettronica.lol</a>
