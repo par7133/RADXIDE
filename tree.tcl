@@ -295,12 +295,16 @@ namespace eval tree {
 		  
 		    if {[isHtml $fname]} {
 		      set imgopt $icons(HTML-ICONI)
+		    } elseif {[isCss $fname]} {
+		      set imgopt $icons(CSS-ICONI)		      
 		    } elseif {[isJs $fname]} {
 		      set imgopt $icons(JS-ICONI)		      
 		    } elseif {[isPhp $fname]} {
 		      set imgopt $icons(PHP-ICONI)
 		    } elseif {[isTxt $fname]} {
-		      set imgopt $icons(TXT-ICONI)		      		      
+		      set imgopt $icons(TXT-ICONI)
+		    } elseif {[isImage $fname]} {
+		      set imgopt $icons(IMG-ICONI)		      
 		    } else {
 		      set imgopt $icons(GENERIC-FILE-ICONI)
 		    }
@@ -541,6 +545,42 @@ namespace eval tree {
 		return no
 	}
 
+# ________________________ isCss _________________________ #
+
+	proc isCss {fname} {
+		# Checks if a file is of Css.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(CssExts)} {
+		  return yes
+		}
+		return no
+	}
+
+# ________________________ isBin _________________________ #
+
+	proc isBin {fname} {
+		# Checks if a file is of isBin.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(BinExts)} {
+		  return yes
+		}
+		return no
+	}
+
+# ________________________ isImage _________________________ #
+
+	proc isImage {fname} {
+		# Checks if a file is of Image.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(ImgExts)} {
+		  return yes
+		}
+		return no
+	}
+
 # ________________________ isJs _________________________ #
 
 	proc isJs {fname} {
@@ -601,7 +641,7 @@ namespace eval tree {
 		  if {[set ID [$tree selection]] eq {}} return
 		}
 		lassign [$tree item $ID -values] -> fname isfile
-		if {$isfile} {
+		if {$isfile && (![isBin $fname]) && (![isImage $fname])} {
 		  $dan(TEXT) config -state normal
 		  $dan(TEXT) delete 1.0 end 
 		  $dan(TEXT) insert 1.0 [::radxide::filelib::openFile $fname]
