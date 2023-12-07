@@ -62,6 +62,7 @@ namespace eval file {
 	  $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state disabled
 	  
 	  ::radxide::main::updateAppTitle		      
 	}
@@ -97,6 +98,10 @@ namespace eval file {
 	  $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state disabled		  
 	  $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state disabled
     $menu(FILE) entryconfigure $menu(CLOSE_PROJECT_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state disabled
 
 	  ::radxide::main::updateAppTitle		      
 	  

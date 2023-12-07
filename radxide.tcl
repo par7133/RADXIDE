@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.1.3
+package provide radxide 1.1.4
 
 set _ [package require Tk]
 wm withdraw .
@@ -55,7 +55,7 @@ namespace eval radxide {
   set DEBUG no  ;# debug mode
   
   set dan(WIN) .danwin              ;# main form
-  set dan(WORKDIR) "/home/YourUser/.radxwork"  ;# root working dir
+  set dan(WORKDIR) "/home/pocahontas/.radxwork"  ;# root working dir
   set dan(TITLE) RADXIDE
   
   # Check workdir existance..
@@ -160,12 +160,12 @@ namespace eval radxide {
   set menu(PASTE_ENTRY_IDX) 1;
   set menu(CUT_ENTRY_IDX) 2;
   set menu(FIND_ENTRY_IDX) 4;    
+  set menu(GOTO_ENTRY_IDX) 5;
     
   set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny .inc}     ;# extensions of php files
   set dan(HtmlExts) {.html .htm}                                  ;# extensions of html files
   set dan(CssExts) {.css}                                         ;# extensions of css files
   set dan(JsExts) {.js}                                           ;# extensions of js files
-  set dan(CssExts) {.css}                                         ;# extensions of css files
   set dan(TxtExts) {.txt .rtf}                                    ;# extensions of txt files
   set dan(ImgExts) {.gif .png .jpg .jpeg}                         ;# extensions of images
   set dan(BinExts) {.so .o .exe}                                  ;# extensions of binary

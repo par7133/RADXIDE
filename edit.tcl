@@ -22,7 +22,7 @@ namespace eval edit {
 
 # ________________________ find _________________________ #
 
-	proc find {win} {
+	proc find {} {
     # Open the Find window to start a text search
 
     namespace upvar ::radxide dan dan project project
@@ -45,10 +45,34 @@ namespace eval edit {
 		     
 		  catch {lassign [::radxide::win::input "Find" {} "Find text" [list \
 		    ent "{} {} {-w 64}" "{$sel}"] \
-		    -head "Serach for:" {*}$args] res}
+		    -head "Search for:" {*}$args] res}
     }
 	}
 
+# ________________________ GotoLine _________________________ #
+
+
+	proc GotoLine {} {
+    # Open the Go To Line window
+
+    namespace upvar ::radxide dan dan project project
+
+    set t $dan(TEXT)
+    set args {}
+    set ln 1
+
+		if {$project(CUR_FILE_PATH) ne {}} {
+
+		  #tk_messageBox -title $dan(TITLE) -icon info -message "Go To Line"
+		  
+		  set args "-buttons {butSearch SEARCH ::radxide::win::GotoLineOK butCANCEL CANCEL ::radxide::win::GotoLineCancel}"
+		     
+		  catch {lassign [::radxide::win::input "GotoLine" {} "Go to Line" [list \
+		    ent "{} {} {-w 28}" "{$ln}"] \
+		    -head "Go to line:" {*}$args] res}
+    }
+	}
+	
 # ________________________ makeCopy _________________________ #
 
 	proc makeCopy {win} {

@@ -655,6 +655,7 @@ namespace eval tree {
 	    $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state normal
 	    $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state normal	    
 	    $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state normal
+	    $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state normal	    
 	    
 	    set project(CUR_FILE_PATH) $fname
 	    

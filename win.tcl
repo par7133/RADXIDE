@@ -967,7 +967,7 @@ namespace eval win {
 
   proc findTextOK {} {
   
-    namespace upvar ::radxide dan dan project project
+    namespace upvar ::radxide dan dan
 
     variable dlg
     variable data
@@ -1241,6 +1241,55 @@ namespace eval win {
     }
     return $res
   }
+
+# ________________________ GotoLineOK _________________________ #
+
+
+  proc GotoLineOK {} {
+  
+    namespace upvar ::radxide dan dan
+
+    variable dlg
+    
+    set wt $dan(TEXT) 
+    set lmax [expr {int([$wt index "end -1c"])}]
+    
+    #set t $Dlgpath.fra.fraM.fraent.ent
+    set t [dlgPath].fra.[FieldName [lindex [getDialogField 0] 0]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message textbox=$t
+    set varname [lindex [getDialogField end] 0]
+    #tk_messageBox -title $dan(TITLE) -icon info -message varname=$varname
+    set oldlinenumber [lindex [getDialogField end] 1]
+    #tk_messageBox -title $dan(TITLE) -icon info -message oldlinenumber=$oldlinenumber
+    set newlinenumber [string trim [$t get]]
+    #tk_messageBox -title $dan(TITLE) -icon info -message newlinenumber=$newlinenumber
+
+    if {$newlinenumber>$lmax} {
+      tk_messageBox -title $dan(TITLE) -icon info -message "Line $newlinenumber doesn't exist $newlinenumber>MAXLINES."
+      return 0
+    }
+
+    ::tk::TextSetCursor $wt 0.0
+    after 200 "tk::TextSetCursor $wt [expr $newlinenumber].0"
+          
+    catch {[destroy [dlgPath]]}
+  
+    return 1
+  }
+
+
+# ________________________ GotoLineCancel _________________________ #
+
+
+  proc GotoLineCancel {} {
+  
+    #catch {[destroy .danwin.diaRenameFile1]}    
+    catch {[destroy [dlgPath]]}
+        
+    return 0
+  }
+
+
 
 # ________________________ iconImage _________________________ #
 
@@ -1801,6 +1850,7 @@ namespace eval win {
   
   # Scrollbars amenities
   proc Yset {widgets master sb args} {
+   
     #if {$master eq "master"} {
       #list $sb set [expr [lindex $args 0]] [expr [lindex $args 1]]
       
@@ -1815,59 +1865,14 @@ namespace eval win {
       #set w1 [lrange $widgets 0 0]		    
     #} 
     
-    #set w1 [lrange $widgets 0 0]
-    #set w2 [lrange $widgets 1 1]
-    
     ::radxide::win::Yview $w1 moveto [lindex $args 0]
-    #::radxide::win::Yview $w1 moveto [lindex $args 0]
+
   }
   
   #set mycookie(0) 0 
   proc Yview {widgets args} {
-    #variable mycookie
-    #if {$mycookie(0) < 3} {
-      #incr mycookie(0)
-  		#tk_messageBox -title title -icon error -message [lindex $args 0]
-  		#tk_messageBox -title title -icon error -message [lindex $args 1]
-  		#tk_messageBox -title title -icon error -message [lindex $args 2]
-		#}  
     foreach w $widgets {
-      #$w configure -state normal
-      #if {[lindex $args 0] eq "moveto" || [lindex $args 0] eq "scroll"} {
-      #  if {[lindex $args 0] eq "scroll"} {
-      #    if {[lindex $args 2] ne ""} {
-      #     set u [lindex $args 2]
-      #    } else {
-      #      set u units
-      #    }  
-      #  }
-        $w yview {*}$args
-      #} else {
-      #  $w yview scroll {*}$args units
-      #}  
-      #$w configure -state disabled      
-      #if {[lindex $args 0] eq "moveto"} {
-      #  $w yview moveto [lindex $args 1]
-      #} elseif {[lindex $args 0] eq "scroll"} {
-      #  if {[lindex $args 2] ne ""} {
-      #    set u [lindex $args 2]
-      #  } else {
-      #    set u units
-      #  }  
-      #  $w yview scroll [lindex $args 1] $u
-      #} elseif {[lindex $args 0] eq "-1"} {
-      #  $w yview scroll -1 units
-      #} elseif {[lindex $args 0] eq "1"} {
-      #  $w yview scroll 1 units        
-      #} elseif {[lindex $args 0] eq "0"} {  
-      #  $w yview scroll 0 units
-      #} elseif {[lindex $args 0] eq "-5"} {  
-      #  $w yview scroll -5 units 
-      #} elseif {[lindex $args 0] eq "5"} {  
-      #  $w yview scroll 5 units                
-      #} else {
-      #  tk_messageBox -title title -icon error -message [lindex $args 0]
-      #}  
+      $w yview {*}$args
     }
   } 
   
@@ -2558,7 +2563,7 @@ namespace eval win {
     # add the buttons
     
     # xxx
-    if {$dlgname eq "RenameFile" || $dlgname eq "RenameFolder" || $dlgname eq "Find"} {
+    if {$dlgname eq "RenameFile" || $dlgname eq "RenameFolder" || $dlgname eq "Find" || $dlgname eq "GotoLine"} {
       set buttons [string map {"butOK OK 1" "" "butCANCEL Cancel destroy" ""} $buttons]
     }
     lassign [AppendButtons widlist $buttons h__ L $defb $timeout $qdlg $modal] \
