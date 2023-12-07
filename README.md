@@ -42,7 +42,7 @@ refer to <eglib.tcl> part of this software.
 License: MIT.<br><br>
 
 Copyright (c) 2023-2024 5 Mode <br>
-Copyright (c) 2021-2023 Alex Plotnikov (original scaffolding and excerpts.)
+Copyright (c) 2021-2023 Alex Plotnikov
 
 <br>
 
