@@ -37,7 +37,7 @@ and the contributors of RADXIDE have no
 knowledge about. For the related copyright notice
 refer to <eglib.tcl> part of this software.
 
-<br><br><br>
+<br><br>
 
 License: MIT.<br>
 Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
