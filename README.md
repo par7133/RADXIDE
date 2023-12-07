@@ -39,9 +39,16 @@ refer to <eglib.tcl> part of this software.
 
 <br>
 
-License: MIT.<br>
-Copyright (c) 2023-2024 5 Mode (Last implementation and adaptations.)<br>
+License: MIT.<br><br>
+
+Copyright (c) 2023-2024 5 Mode <br>
 Copyright (c) 2021-2023 Alex Plotnikov (original scaffolding and excerpts.)
+
+<br>
+
+Authors:<br>
+RAXIDE, Daniele Bonini (Last implementation and adaptations.) <br>
+Alited, Alex Plotnikov (original scaffolding and excerpts.)
 
 <br><br>
 
