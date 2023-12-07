@@ -4,8 +4,8 @@
 # Date:    05/12/2023
 # Desc:    Tree namespace of RadXIDE.
 #
-#          Tree namespace and most of code 
-#          here presented and distributed contain excerpts 
+#          Tree namespace and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 

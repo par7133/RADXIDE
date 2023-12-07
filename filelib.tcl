@@ -2,10 +2,10 @@
 # Name:    filelib.tcl
 # Author:  Daniele Bonini  (posta@elettronica.lol)
 # Date:    01/12/2023
-# Desc:    Files namespace of RadXIDE.
+# Desc:    Filelib namespace of RadXIDE.
 #
-#          Files namespace and most of code 
-#          here presented and distributed contain excerpts 
+#          Filelib namespace and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 

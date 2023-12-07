@@ -2,25 +2,25 @@
 # Name:    radxide
 # Author:  Daniele Bonini  (posta@elettronica.lol)
 # Date:    05/12/2023
-# Desc:    RadXIDE.
+# Desc:    RADXIDE.
 #
-#          Starting file and most of code 
-#          here presented and distributed contain excerpts 
+#          RADXIDE files and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 
 #          borrowed from other sources which the author
-#          and the contributors to this RadXIDE have no 
+#          and the contributors of RADXIDE have no 
 #          knowledge about.
 #
-#          Code Library scaffolding and most of its code 
-#          from "Practical Programming in Tcl and Tk, 4th Ed."
+#          Code Library scaffolding and most of its code contains
+#          excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
 #          by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 #          The original code of these excerpts could be 
 #          borrowed from other sources which the author
 #          and the contributors to RadXIDE have no 
 #          knowledge about. For the related copyright notice
-#          refer <eglib.tcl> part of this software.
+#          refer to <eglib.tcl>, part of this software.
 #
 # License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)
 #               Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)

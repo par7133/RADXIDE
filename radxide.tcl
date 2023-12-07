@@ -3,10 +3,10 @@
 # Name:    radxide.tcl
 # Author:  Daniele Bonini  (posta@elettronica.lol)
 # Date:    05/12/2023
-# Desc:    Starting file of RadXIDE.
+# Desc:    Bootstrap file of RadXIDE.
 #
-#          Starting file and most of code 
-#          here presented and distributed contain excerpts 
+#          Bootstrap file and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 
@@ -14,8 +14,8 @@
 #          and the contributors to this RadXIDE have no 
 #          knowledge about.
 #
-#          Code Library scaffolding and most of its code 
-#          from "Practical Programming in Tcl and Tk, 4th Ed."
+#          Code Library scaffolding and most of its code contains 
+#          excerpts from "Practical Programming in Tcl and Tk, 4th Ed."
 #          by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 #          The original code of these excerpts could be 
 #          borrowed from other sources which the author
@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.1.1
+package provide radxide 1.1.3
 
 set _ [package require Tk]
 wm withdraw .
@@ -70,6 +70,7 @@ namespace eval radxide {
     
   set dan(TREEVIEW) ""              ;# ide project tree
   set dan(GUTTEXT) ""               ;# ide guttext control 
+  set dan(GUTTERWIDTH) 12
   set dan(TEXT) ""                  ;# ide text control
   set dan(prjdirignore) {.git .bak} ;# ignored subdirectories of project
   

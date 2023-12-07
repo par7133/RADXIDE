@@ -4,8 +4,8 @@
 # Date:    27/11/2023
 # Desc:    File Menu namespace of RadXIDE.
 #
-#          Edit Menu namespace scaffolding and most of code 
-#          here presented and distributed contain excerpts 
+#          File Menu namespace scaffolding and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 

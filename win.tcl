@@ -2,10 +2,10 @@
 # Name:    win.tcl
 # Author:  Daniele Bonini  (posta@elettronica.lol)
 # Date:    26/11/2023
-# Desc:    Win(ndow) library of RadXIDE.
+# Desc:    Win namespace of RadXIDE.
 #
-#          Win library scaffolding and most of code 
-#          here presented and distributed contain excerpts 
+#          Win namespace scaffolding and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 
@@ -863,15 +863,6 @@ namespace eval win {
     #  args - additional arguments for tracing
     # The code is borrowed from open source tedit project.
     
-    #set shift [expr $shift-1]
-    #set linenum [expr {0}]
-    #set savedcont $txt
-    #set savedcont [namespace current]::gc$txt
-    #if {![winfo exists $txt] || ![winfo ismapped $txt]} {
-    #  unset -nocomplain $savedcont
-    #  return
-    #}
-    
     namespace upvar ::radxide dan dan
     
     $canvas configure -state normal
@@ -880,52 +871,33 @@ namespace eval win {
       event generate $txt <Configure> ;# repaints the gutter
       return
     }
-    #set oper [lindex $args 0 1]
-    #if {![llength $args] || [lindex $args 0 4] eq {-elide} || \
-    #$oper in {configure delete insert see yview}} {
-      set i [$txt index @0,0]
-      set gcont [list]
-      while true {
-        set dline [$txt dlineinfo $i]
-        if {[llength $dline] == 0} break
-        set height [lindex $dline 3]
-        set y [expr {[lindex $dline 1]}]
-        set linenum [format "%${width}d" [lindex [split $i .] 0]]
-        set i [$txt index "$i +1 lines linestart"]
-        #lappend gcont [list $y $linenum\n]
-        lappend gcont [list $y [expr {$linenum}]\n]
-      }
-      # update the gutter at changing its contents/config
-      #if {[::apave::cs_Active]} {
-      #  lassign [csGet] - - - bg - - - - fg
-      #  setProperty _GUTTER_FGBG [list $fg $bg]
-      #} else {
-      #  lassign [getProperty _GUTTER_FGBG] fg bg
-      #}
-      set cwidth [expr {$shift + \
-        [font measure monospace -displayof $txt [string repeat 0 $width]]}]
-      #set newbg [expr {$bg ne [$canvas cget -background]}]
-      set newwidth [expr {$cwidth ne [$canvas cget -width]}]
-      #if {![llength $args] || $newbg || $newwidth || ![info exists $savedcont] || \
-      #$gcont ne [set $savedcont]} {
-        #if {$newbg} {$canvas config -background $newbg}
-        #if {$newwidth} {$canvas config -width $cwidth}
-        $canvas delete 1.0 end
-        set y [expr {0}]
-	      foreach g $gcont {
-	        lassign $g y linenum
-	        #$canvas insert [expr {$y-1}].0 $linenum
-	        $canvas insert [expr {$y}].0 $linenum
-	    #    #$canvas create text 2 $y -anchor nw -text $linenum -font apaveFontMono -fill $fg
-	      }
-        #if {[expr {$y}] ne 1} {
-        # $canvas insert [expr {$y}].0 [expr {$linenum+1}]
-        # lassign $g y linenum
-        # $canvas insert $y $linenum
-        #}  
-      #}
-   # }
-    #tk_messageBox -title $dan(TITLE) -icon error -message linenum=$linenum
+
+    set i 1
+    set gcont [list]
+    set totlines [expr [$txt count -lines 0.0 end]]
+    while true {
+      if {$i > $totlines} break
+      #set dline [$txt dlineinfo $i] ;# xxx
+      set dline [$txt get [lindex [split $i .] 0].0 [lindex [split $i .] 0].end]         
+      #if {[llength $dline] == 0} break
+      #set height [lindex $dline 3] ;# xxx
+      #set y [expr {[lindex $dline 1]}] ;# xxx
+      set linenum [format "%${width}d" [lindex [split $i .] 0]]
+      #set i [$txt index "$i +1 lines linestart"] # xxx
+      #lappend gcont [list $y $linenum\n]
+      lappend gcont [list [lindex [split $i .] 0] [expr {$linenum}]\n]
+      incr i
+    }
+
+    set newwidth $dan(GUTTERWIDTH); 
+
+    $canvas delete 1.0 end
+    set y [expr {0}]
+    foreach g $gcont {
+      lassign $g y linenum
+      $canvas insert [expr {$y}].0 $linenum
+    }
+
     $canvas configure -state disabled
   }
 
@@ -1827,6 +1799,77 @@ namespace eval win {
 
 # ________________________ makeMainWindow _________________________ #
   
+  # Scrollbars amenities
+  proc Yset {widgets master sb args} {
+    #if {$master eq "master"} {
+      #list $sb set [expr [lindex $args 0]] [expr [lindex $args 1]]
+      
+      set sb1 [lrange $sb 0 0]
+      set sb2 [lrange $sb 1 1]
+      
+      $sb1 set {*}$args
+      $sb2 set {*}$args
+      
+      set w1 [lrange $widgets 1 end]
+    #} else {
+      #set w1 [lrange $widgets 0 0]		    
+    #} 
+    
+    #set w1 [lrange $widgets 0 0]
+    #set w2 [lrange $widgets 1 1]
+    
+    ::radxide::win::Yview $w1 moveto [lindex $args 0]
+    #::radxide::win::Yview $w1 moveto [lindex $args 0]
+  }
+  
+  #set mycookie(0) 0 
+  proc Yview {widgets args} {
+    #variable mycookie
+    #if {$mycookie(0) < 3} {
+      #incr mycookie(0)
+  		#tk_messageBox -title title -icon error -message [lindex $args 0]
+  		#tk_messageBox -title title -icon error -message [lindex $args 1]
+  		#tk_messageBox -title title -icon error -message [lindex $args 2]
+		#}  
+    foreach w $widgets {
+      #$w configure -state normal
+      #if {[lindex $args 0] eq "moveto" || [lindex $args 0] eq "scroll"} {
+      #  if {[lindex $args 0] eq "scroll"} {
+      #    if {[lindex $args 2] ne ""} {
+      #     set u [lindex $args 2]
+      #    } else {
+      #      set u units
+      #    }  
+      #  }
+        $w yview {*}$args
+      #} else {
+      #  $w yview scroll {*}$args units
+      #}  
+      #$w configure -state disabled      
+      #if {[lindex $args 0] eq "moveto"} {
+      #  $w yview moveto [lindex $args 1]
+      #} elseif {[lindex $args 0] eq "scroll"} {
+      #  if {[lindex $args 2] ne ""} {
+      #    set u [lindex $args 2]
+      #  } else {
+      #    set u units
+      #  }  
+      #  $w yview scroll [lindex $args 1] $u
+      #} elseif {[lindex $args 0] eq "-1"} {
+      #  $w yview scroll -1 units
+      #} elseif {[lindex $args 0] eq "1"} {
+      #  $w yview scroll 1 units        
+      #} elseif {[lindex $args 0] eq "0"} {  
+      #  $w yview scroll 0 units
+      #} elseif {[lindex $args 0] eq "-5"} {  
+      #  $w yview scroll -5 units 
+      #} elseif {[lindex $args 0] eq "5"} {  
+      #  $w yview scroll 5 units                
+      #} else {
+      #  tk_messageBox -title title -icon error -message [lindex $args 0]
+      #}  
+    }
+  } 
   
   proc makeMainWindow {win ttl bg fg} {
 
@@ -1860,35 +1903,38 @@ namespace eval win {
 		  $tree heading #0 -text "  Project" -anchor "w"
 		  
 		  # main pane (panR)
-		  pack [set w2 [frame $pan.fra2 -background $bg ]] -side left -fill both -expand 1 ;#-fill both
+		  pack [set w2 [ttk::panedwindow $pan.fra2 -orient horizontal]] -side left -fill both -expand 1
 		  set panR [$pan add $pan.fra2]
-		  pack [text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5] -side left -fill both -expand 0 -anchor nw
- 		  # text pane
-		  #pack [text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -expand 1 -fill both;#-gutterwidth 5 -guttershift 3
-		  #pack [text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 155] -side left -expand 1 -fill both -anchor nw;#-gutterwidth 5 -guttershift 3
-		  frame $w2.fra
-		  text $w2.fra.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -xscrollcommand [list $w2.fra.xscroll set] -yscrollcommand [list $w2.fra.yscroll set] -wrap none
-		  scrollbar $w2.fra.xscroll -orient horizontal \
-		    -command [list $w2.fra.text xview]
-		  scrollbar $w2.fra.yscroll -orient vertical \
-		    -command [list $w2.fra.text yview]
-		  grid $w2.fra.text $w2.fra.yscroll -sticky news
-	   	grid $w2.fra.xscroll -sticky news
-		  grid rowconfigure $w2.fra 0 -weight 1
-		  grid columnconfigure $w2.fra 0 -weight 1
-		  pack $w2.fra -side left -expand 1 -fill both -anchor nw;
-		  
+		  text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5
+		  text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -wrap none 
+		  set ww [list .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText]
+		  $w2.text configure -xscrollcommand [list $w2.xscroll set]
+		  scrollbar $w2.xscroll -orient horizontal \
+		    -command [list $w2.text xview]
+		  scrollbar $w2.yscroll1 -orient vertical \
+		    -command [list ::radxide::win::Yview $ww]
+		  scrollbar $w2.yscroll2 -orient vertical \
+		    -command [list $w2.gutText yview]		    
+		  set ssbb [list .danwin.fra.pan.fra2.yscroll1 .danwin.fra.pan.fra2.yscroll2]  
+		  $w2.text configure -yscrollcommand [list ::radxide::win::Yset $ww master $ssbb]
+		  $w2.gutText configure -yscrollcommand [list .danwin.fra.pan.fra2.yscroll2 set]		    
+		  grid $w2.gutText $w2.text $w2.yscroll1 -sticky nsew
+	   	grid $w2.xscroll -columnspan 2 -sticky nsew
+		  grid rowconfigure $w2 0 -weight 1
+		  grid columnconfigure $w2 1 -weight 1
+			  
 		  set dan(GUTTEXT) $w2.gutText
-		  set dan(TEXT) $w2.fra.text
+		  set dan(TEXT) $w2.text
+		  $dan(GUTTEXT) configure -state disabled
 		  $dan(TEXT) configure -state disabled
 		  
 		  # code library
 		  pack [set w3 [frame $pan.fra3 -background $bg]] -side left -fill y -expand 1;
-		  set panRR [$pan add $pan.fra3]
+		  set panC [$pan add $pan.fra3]
 		  ::radxide::eglib::create $w3
 		  
 		  # update gutter, key bindings     
-      bind $dan(TEXT) "<KeyRelease>" {::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"}
+      bind $dan(TEXT) "<KeyRelease>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"}
       bind $tree "<ButtonPress>" {after idle {::radxide::tree::buttonPress %b %x %y %X %Y}}
       bind $tree "<ButtonRelease>" {after idle {::radxide::tree::buttonRelease %b %s %x %y %X %Y}}      
       

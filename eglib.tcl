@@ -4,13 +4,13 @@
 # Date:    05/12/2023
 # Desc:    Code library code. 
 #
-#          Code Library scaffolding and most of code 
-#          here presented and distributed contain excerpts 
+#          Code Library scaffolding and most of the code 
+#          here presented and distributed contains excerpts 
 #          from "Practical Programming in Tcl and Tk, 4th Ed."
 #          by Brent B. Welch, Ken Jones, Jeffrey Hebbs.
 #          The original code of these excerpts could be 
 #          borrowed from other sources which the author
-#          and the contributors to RadXIDE have no 
+#          and the contributors to RADXIDE have no 
 #          knowledge about.
 #
 # License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)

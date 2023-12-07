@@ -4,8 +4,8 @@
 # Date:    27/11/2023
 # Desc:    Menu namespace of RadXIDE.
 #
-#          Menu namespace and most of code 
-#          here presented and distributed contain excerpts 
+#          Menu namespace and most of the code 
+#          here presented and distributed contains excerpts 
 #          from [alited](https://github.com/aplsimple/alited
 #          by Alex Plotnikov and contributors to the project.
 #          The original code of these excerpts could be 
@@ -67,7 +67,7 @@ namespace eval menu {
 		$m2 add separator
 		$m2 add command -label Options -command { ::radxide::menu::edit::setup } 
 		set m3 [menu $m.help -tearoff 0]
-		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.0.5\n\n\nMIT Licence.\n\n\nCopyrights (c) 2023-2024 5 Mode http://5mode.com\n\nThe software is provided AS-IS.\n\nA great 'Thank you' to Alex Plotnikov and his Alited (copyrights notice are included in the single files of RADXIDE!)\n\n\n"}
+		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.1.2\n\n\nMIT Licence.\n\n\nCopyrights (c) 2023-2024 5 Mode http://5mode.com\n\nThe software is provided AS-IS.\n\nA great 'Thank you' to Alex Plotnikov and his Alited (copyrights notice are included in the single files of RADXIDE!)\n\n\n"}
     return $m
 	}
 
