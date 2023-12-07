@@ -21,7 +21,7 @@ one [tag] on their names and containg a first line of
 phpinfo();<br>
 <br>
 RADXIDE and most of code here presented and distributed contains excerpts 
-from [alited](https://github.com/aplsimple/alited by Alex Plotnikov and 
+from [alited](https://github.com/aplsimple/alited) by Alex Plotnikov and 
 contributors to the project.
 The original code of these excerpts could be 
 borrowed from other sources which the author
