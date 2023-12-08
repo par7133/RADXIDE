@@ -1,5 +1,5 @@
 # RADXIDE
-One more IDE but thought for RAD - Tcl-Tk &lt;= 8.6
+One more IDE but thought for RAD
 
 <br><br>
 Originally envisioned for RAD development in PHP...
