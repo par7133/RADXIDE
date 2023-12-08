@@ -59,16 +59,16 @@ namespace eval menu {
 		set m2 [menu $m.edit -tearoff 0]
 		set menu(EDIT) $m2
 		$m add cascade -label Help -menu $m.help
-		$m2 add command -label Copy -command { ::radxide::menu::edit::makeCopy .danwin.fra.text }  -accelerator Ctrl+C -state disabled
-		$m2 add command -label Paste -command { ::radxide::menu::edit::makePaste .danwin.fra.text } -accelerator Ctrl+P -state disabled
-		$m2 add command -label Cut -command { ::radxide::menu::edit::makeCut .danwin.fra.text } -accelerator Ctrl+X -state disabled
+		$m2 add command -label Copy -command { ::radxide::menu::edit::makeCopy }  -accelerator Ctrl+C -state disabled
+		$m2 add command -label Paste -command { ::radxide::menu::edit::makePaste } -accelerator Ctrl+P -state disabled
+		$m2 add command -label Cut -command { ::radxide::menu::edit::makeCut } -accelerator Ctrl+X -state disabled
 		$m2 add separator
 		$m2 add command -label Find -command { ::radxide::menu::edit::find } -accelerator Ctrl+F -state disabled
 		$m2 add command -label "Go to Line" -command { ::radxide::menu::edit::GotoLine } -accelerator Ctrl+G -state disabled
 		$m2 add separator
 		$m2 add command -label Options -command { ::radxide::menu::edit::setup } 
 		set m3 [menu $m.help -tearoff 0]
-		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.1.4\n\n\nMIT Licence.\n\n\nCopyrights (c) 2023-2024 5 Mode http://5mode.com\n\nThe software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n\n\n"}
+		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.1.5\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThe software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n\nhttps://5mode.com\n\n\n"}
     return $m
 	}
 
@@ -82,9 +82,9 @@ namespace eval menu {
  	  bind $ctrl "<Control-o>" { ::radxide::menu::file::openProject }
  	  bind $ctrl "<Control-Alt-x>" { ::radxide::menu::file::closeProject }
  	  bind $ctrl "<Control-q>" { ::radxide::menu::file::quit }
- 	  bind $ctrl "<Control-c>" "::radxide::menu::edit::makeCopy $ctrl"
- 	  bind $ctrl "<Control-p>" "::radxide::menu::edit::makePaste $ctrl"
- 	  bind $ctrl "<Control-x>" "::radxide::menu::edit::makeCut $ctrl"
+ 	  bind $ctrl "<Control-c>" "::radxide::menu::edit::makeCopy"
+ 	  bind $ctrl "<Control-p>" "::radxide::menu::edit::makePaste"
+ 	  bind $ctrl "<Control-x>" "::radxide::menu::edit::makeCut"
  	  bind $ctrl "<Control-f>" "::radxide::menu::edit::find"
 		bind $ctrl "<Control-g>" "::radxide::menu::edit::GotoLine"
 		

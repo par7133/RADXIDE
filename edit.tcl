@@ -65,7 +65,7 @@ namespace eval edit {
 
 		  #tk_messageBox -title $dan(TITLE) -icon info -message "Go To Line"
 		  
-		  set args "-buttons {butSearch SEARCH ::radxide::win::GotoLineOK butCANCEL CANCEL ::radxide::win::GotoLineCancel}"
+		  set args "-buttons {butGo GO ::radxide::win::GotoLineOK butCANCEL CANCEL ::radxide::win::GotoLineCancel}"
 		     
 		  catch {lassign [::radxide::win::input "GotoLine" {} "Go to Line" [list \
 		    ent "{} {} {-w 28}" "{$ln}"] \
@@ -75,29 +75,44 @@ namespace eval edit {
 	
 # ________________________ makeCopy _________________________ #
 
-	proc makeCopy {win} {
-    # Copy from the textPane to the clipboard
+	proc makeCopy {} {
+    # Copy from the editor to the clipboard
     #clipboard clear
     #clipboard append $txt
-    tk_textCopy $win
+    
+    namespace upvar ::radxide dan dan
+    
+    set t $dan(TEXT)
+    
+    tk_textCopy $t
 	}
 
 #_________________________ makeCut ________________________ #
 
-	proc makeCut {win} {
-    # Cut from the textPane to the clipboard
+	proc makeCut {} {
+    # Cut from the editor to the clipboard
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
-    tk_textCut $win    
+
+    namespace upvar ::radxide dan dan
+    
+    set t $dan(TEXT)
+    
+    tk_textCut $t
 	}
 	
 #_________________________ makePaste ________________________ #
 
-	proc makePaste {win} {
-    # Paste from the clipboard to the textPane
+	proc makePaste {} {
+    # Paste from the clipboard to the editor
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
-    tk_textPaste $win    
+    
+    namespace upvar ::radxide dan dan
+    
+    set t $dan(TEXT)
+    
+    tk_textPaste $t    
 	}
 
 #_________________________ setup ________________________ #

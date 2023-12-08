@@ -51,7 +51,8 @@ namespace eval win {
 #  set data(docheck) yes 
   set Foundstr {}   ;# current found string
   set HLstring {}   ;# current selected string
-        
+  set Widgetopts [list]
+  
   set _Defaults [dict create \
     bts {{} {}} \
     but {{} {}} \
@@ -685,9 +686,11 @@ namespace eval win {
     #   varopt - a variable option
     # The *varopt* refers to a variable part such as tvar, lvar:
     #  * -inpval option means an initial value of the field
-    #  * -retpos option has p1:p2 format (e.g. 0:10) to cut a substring \
-    from a returned value
+    #  * -retpos option has p1:p2 format (e.g. 0:10) to cut a substring from a returned value
     # Returns *attrs* without -inpval and -retpos options.
+
+    # xxx
+    variable Widgetopts
 
     lassign [parseOptions $attrs $varopt {} -retpos {} -inpval {}] \
       vn rp iv
@@ -734,6 +737,10 @@ namespace eval win {
   ; proc contFCO {fline opts edge args} {
       # Given a file's line and options,
       # cuts a substring from the line.
+      
+      # xxx
+      variable Widgetopts
+      
       lassign [parseOptionsFile 1 $opts {*}$args] opts
       lassign $opts - - - div1 - div2 - pos - len - RE - ret
       set ldv1 [string length $div1]
@@ -1125,6 +1132,9 @@ namespace eval win {
     # Makes output values for some widgets (lbx, fco).
     # Some i/o widgets need a special method to get their returned values.
 
+    # xxx
+    variable Widgetopts
+
     foreach aop $Widgetopts {
       lassign $aop optnam vn v1 v2
       switch -glob -- $optnam {
@@ -1429,6 +1439,8 @@ namespace eval win {
     # Initializes input and clears variables made in previous session.
 
     variable _savedvv
+    # xxx   
+    variable Widgetopts
 
     foreach {vn vv} $_savedvv {
       catch {unset $vn}
