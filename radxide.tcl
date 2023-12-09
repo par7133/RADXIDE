@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.1.8
+package provide radxide 1.2.0
 
 set _ [package require Tk]
 wm withdraw .
