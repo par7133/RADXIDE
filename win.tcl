@@ -906,6 +906,8 @@ namespace eval win {
     }
 
     $canvas configure -state disabled
+    
+    return 2
   }
 
 
@@ -1890,12 +1892,13 @@ namespace eval win {
       $sb1 set {*}$args
       $sb2 set {*}$args
       
-      set w1 [lrange $widgets 1 end]
+      set myw [lrange $widgets 1 end]
     #} else {
-      #set w1 [lrange $widgets 0 0]		    
+    #  set myw [lrange $widgets 0 0]		    
     #} 
     
-    ::radxide::win::Yview $w1 moveto [lindex $args 0]
+    ::radxide::win::Yview $myw moveto [lindex $args 0]
+    #::radxide::win::Yview [lrange $widgets 0 0] moveto [lindex $args 0]
 
   }
   
@@ -1968,7 +1971,10 @@ namespace eval win {
 		  ::radxide::eglib::create $w3
 		  
 		  # update gutter, key bindings     
-      bind $dan(TEXT) "<KeyRelease>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"}
+      bind $dan(TEXT) "<Return>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"}
+      bind $dan(TEXT) "<BackSpace>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"}
+      bind $dan(TEXT) "<Cancel>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll -0 units ;::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll 1 units}
+      bind $dan(TEXT) "<Delete>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll -1 units ;::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll 1 units}
       bind $tree "<ButtonPress>" {after idle {::radxide::tree::buttonPress %b %x %y %X %Y}}
       bind $tree "<ButtonRelease>" {after idle {::radxide::tree::buttonRelease %b %s %x %y %X %Y}}      
       
@@ -3226,6 +3232,11 @@ namespace eval win {
       
       set $newlength 0
       set nindent 0   
+      
+      ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+      ::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll -1 units 
+      ::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll 1 units
+            
       return 0
     } else {
     
@@ -3236,6 +3247,11 @@ namespace eval win {
 		  set idx3 [$wt index insert]
 		  set idx4 [$wt index "$idx3 +1 line"]
 		  ::tk::TextSetCursor $wt $idx3
+		  
+		  ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+      ::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll -1 units 
+      ::radxide::win::Yview {.danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText} scroll 1 units
+		  
       return -code break
     }      
   }
