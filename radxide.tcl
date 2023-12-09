@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.2.1
+package provide radxide 1.2.2
 
 set _ [package require Tk]
 wm withdraw .
@@ -258,4 +258,5 @@ if {[catch {set res [radxide::main::_run]} err]} {
   exit 2
 }
 
+exit 0
 # _________________________________ EOF _________________________________ #
