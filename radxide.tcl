@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.2.0
+package provide radxide 1.2.1
 
 set _ [package require Tk]
 wm withdraw .
@@ -72,6 +72,11 @@ namespace eval radxide {
   set dan(GUTTEXT) ""               ;# ide guttext control 
   set dan(GUTTERWIDTH) 12
   set dan(TEXT) ""                  ;# ide text control
+  set dan(TEXTBG) "#222223"
+  set dan(TEXTFG) "#55ff55"
+  set dan(TEXTSELFG) "red"
+  set dan(CURSORCOLOR) "red"
+  set dan(CURSORWIDTH) "4"
   set dan(prjdirignore) {.git .bak} ;# ignored subdirectories of project
   
   set project(NAME) ""              ;# project default name

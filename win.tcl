@@ -1943,7 +1943,7 @@ namespace eval win {
 		  pack [set w2 [ttk::panedwindow $pan.fra2 -orient horizontal]] -side left -fill both -expand 1
 		  set panR [$pan add $pan.fra2]
 		  text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5
-		  text $w2.text -background "#FFFFFF" -foreground "#222223" -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -wrap none 
+		  text $w2.text -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -wrap none
 		  set ww [list .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText]
 		  $w2.text configure -xscrollcommand [list $w2.xscroll set]
 		  scrollbar $w2.xscroll -orient horizontal \
@@ -1965,6 +1965,11 @@ namespace eval win {
 		  $dan(GUTTEXT) configure -state disabled
 		  $dan(TEXT) configure -state disabled
 		  
+		  # set colors
+		  $dan(TEXT) configure -background $dan(TEXTBG) -foreground $dan(TEXTFG)
+		  $dan(TEXT) configure -selectforeground $dan(TEXTSELFG)
+ 		  $dan(TEXT) configure -insertbackground $dan(CURSORCOLOR) -insertwidth $dan(CURSORWIDTH);
+ 		  	  
 		  # code library
 		  pack [set w3 [frame $pan.fra3 -background $bg]] -side left -fill y -expand 1;
 		  set panC [$pan add $pan.fra3]
