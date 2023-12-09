@@ -1749,6 +1749,24 @@ namespace eval win {
     return $res
   }
 
+# _______________________ insert tab amenities _______________ #
+
+  proc insertTab {} {
+  
+    namespace upvar ::radxide dan dan
+    
+    set wt $dan(TEXT) 
+  
+    #set idx1 [$wt index {insert linestart}]
+    #set idx2 [$wt index {insert lineend}]
+    #set line [$wt get $idx1 $idx2]
+    
+    $wt insert {insert} $dan(TAB_IN_SPACE)
+    
+    return -code break
+  
+  }
+
 # ________________________ IntStatus _________________________ #
 
 
@@ -1881,7 +1899,6 @@ namespace eval win {
 
   }
   
-  #set mycookie(0) 0 
   proc Yview {widgets args} {
     foreach w $widgets {
       $w yview {*}$args
@@ -3185,6 +3202,44 @@ namespace eval win {
 
   }
 
+# ________________________ setNewLineWithIndent _________________________ #
+
+  proc setNewLineWithIndent {} {
+  
+    namespace upvar ::radxide dan dan
+  
+    set wt $dan(TEXT)
+
+    # getting previous line
+    set idx1 [$wt index {insert linestart}]
+    set idx2 [$wt index {insert lineend}]
+    set line [$wt get $idx1 $idx2]
+    
+    # erasing tabs, replacing them with spaces..
+    set line [string map {\t $dan(TAB_IN_SPACE)} $line]
+
+    # calculating identation..
+    set orilength [string length $line]
+    set newlength [string length [string trimleft $line]]   
+    if {$newlength <= 0} {
+      # case previous line is only spaces..
+      
+      set $newlength 0
+      set nindent 0   
+      return 0
+    } else {
+    
+      set nspacesofindent [expr $orilength - $newlength] 
+      
+      # inserintg correct identation..
+		  $wt insert [$wt index {insert}] \n[string repeat " " $nspacesofindent]  
+		  set idx3 [$wt index insert]
+		  set idx4 [$wt index "$idx3 +1 line"]
+		  ::tk::TextSetCursor $wt $idx3
+      return -code break
+    }      
+  }
+  
 # ________________________ setTextBinds _________________________ #
 
 

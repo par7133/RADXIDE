@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.1.5
+package provide radxide 1.1.6
 
 set _ [package require Tk]
 wm withdraw .
@@ -55,7 +55,7 @@ namespace eval radxide {
   set DEBUG no  ;# debug mode
   
   set dan(WIN) .danwin              ;# main form
-  set dan(WORKDIR) "/home/pocahontas/.radxwork"  ;# root working dir
+  set dan(WORKDIR) "/home/YourUser/.radxwork"  ;# root working dir
   set dan(TITLE) RADXIDE
   
   # Check workdir existance..
@@ -121,6 +121,7 @@ namespace eval radxide {
   set dan(MAXFILES) 250
   set dan(MAXFILESIZE) 65534
   set dan(MAXFINDLENGTH) 50 
+  set dan(TAB_IN_SPACE) "  "
    
   # icons
   set dan(ICON) "icons/radxide.png"
@@ -161,7 +162,8 @@ namespace eval radxide {
   set menu(CUT_ENTRY_IDX) 2;
   set menu(FIND_ENTRY_IDX) 4;    
   set menu(GOTO_ENTRY_IDX) 5;
-    
+  
+  # a couplle of extension definitions..
   set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny .inc}     ;# extensions of php files
   set dan(HtmlExts) {.html .htm}                                  ;# extensions of html files
   set dan(CssExts) {.css}                                         ;# extensions of css files
