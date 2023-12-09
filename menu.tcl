@@ -68,7 +68,7 @@ namespace eval menu {
 		$m2 add separator
 		$m2 add command -label Options -command { ::radxide::menu::edit::setup } 
 		set m3 [menu $m.help -tearoff 0]
-		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.2.2\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n\nhttps://5mode.com\n\n\n"}
+		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.2.3\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n\nhttps://5mode.com\n\n\n"}
     return $m
 	}
 
@@ -95,8 +95,8 @@ namespace eval menu {
 	
 #_______________________
 
-  source [file join . file.tcl]
-  source [file join . edit.tcl]
+  source [file join $::radxide::SRCDIR file.tcl]
+  source [file join $::radxide::SRCDIR edit.tcl]
 
 }
 

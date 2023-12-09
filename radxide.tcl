@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-package provide radxide 1.2.2
+package provide radxide 1.2.3
 
 set _ [package require Tk]
 wm withdraw .
@@ -103,7 +103,8 @@ namespace eval radxide {
   # directories of sources
   variable SRCDIR [file join $DIR src]
   variable LIBDIR [file join $DIR lib]
-
+  variable ICONDIR [file join $SRCDIR icons]
+  
   # misc. vars
   variable pID 0
 
@@ -129,30 +130,30 @@ namespace eval radxide {
   set dan(TAB_IN_SPACE) "  "
    
   # icons
-  set dan(ICON) "icons/radxide.png"
+  set dan(ICON) "$ICONDIR/radxide.png"
   set dan(ICONI) [image create photo imgobj1 -file $dan(ICON)]
       
-  set icons(PROJECT-ICON) "icons/archive.png"
+  set icons(PROJECT-ICON) "$ICONDIR/archive.png"
   set icons(PROJECT-ICONI) [image create photo imgobj2 -file $icons(PROJECT-ICON)]
-  set icons(PUBLICF-ICON) "icons/public-folder.png"
+  set icons(PUBLICF-ICON) "$ICONDIR/public-folder.png"
   set icons(PUBLICF-ICONI) [image create photo imgobj3 -file $icons(PUBLICF-ICON)]
-  set icons(PRIVATEF-ICON) "icons/private-folder.png"
+  set icons(PRIVATEF-ICON) "$ICONDIR/private-folder.png"
   set icons(PRIVATEF-ICONI) [image create photo imgobj4 -file $icons(PRIVATEF-ICON)]
-  set icons(HTML-ICON) "icons/file-html.png"
+  set icons(HTML-ICON) "$ICONDIR/file-html.png"
   set icons(HTML-ICONI) [image create photo imgobj5 -file $icons(HTML-ICON)]
-  set icons(JS-ICON) "icons/file-js.png"
+  set icons(JS-ICON) "$ICONDIR/file-js.png"
   set icons(JS-ICONI) [image create photo imgobj6 -file $icons(JS-ICON)]  
-  set icons(IMG-ICON) "icons/image.png"
+  set icons(IMG-ICON) "$ICONDIR/image.png"
   set icons(IMG-ICONI) [image create photo imgobj7 -file $icons(IMG-ICON)]
-  set icons(CSS-ICON) "icons/file-css.png"
+  set icons(CSS-ICON) "$ICONDIR/file-css.png"
   set icons(CSS-ICONI) [image create photo imgobj8 -file $icons(CSS-ICON)]
-  set icons(PHP-ICON) "icons/file-php.png"
+  set icons(PHP-ICON) "$ICONDIR/file-php.png"
   set icons(PHP-ICONI) [image create photo imgobj9 -file $icons(PHP-ICON)]
-  set icons(TXT-ICON) "icons/file-txt.png"
+  set icons(TXT-ICON) "$ICONDIR/file-txt.png"
   set icons(TXT-ICONI) [image create photo imgobj10 -file $icons(TXT-ICON)]
-  set icons(GENERIC-FILE-ICON) "icons/file-generic.png"
+  set icons(GENERIC-FILE-ICON) "$ICONDIR/file-generic.png"
   set icons(GENERIC-FILE-ICONI) [image create photo imgobj11 -file $icons(GENERIC-FILE-ICON)]
-  set icons(FOLDER-ICON) "icons/folder.png"
+  set icons(FOLDER-ICON) "$ICONDIR/folder.png"
   set icons(FOLDER-ICONI) [image create photo imgobj12 -file $icons(FOLDER-ICON)]
   
   # Menu variables
