@@ -659,11 +659,13 @@ namespace eval tree {
 	    
 	    set project(CUR_FILE_PATH) $fname
 	    
+	    focus $dan(TEXT)
+	    ::tk::TextSetCursor $dan(TEXT) @0,0
+	    
 	    ::radxide::main::updateAppTitle
 	    		  
 		  # after idle {alited::bar::BAR draw; alited::tree::UpdateFileTree}
 		}
-
 	}
 
 
