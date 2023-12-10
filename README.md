@@ -1,7 +1,7 @@
 # RADXIDE
 One more IDE but thought for RAD.
 
-<br><br>
+<br>
 Originally envisioned for RAD development in PHP...
 <br><br>
 The software check for the existance of the Working Dir
