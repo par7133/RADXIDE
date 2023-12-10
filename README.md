@@ -1,5 +1,5 @@
 # RADXIDE
-One more IDE but thought for RAD
+One more IDE but thought for RAD.
 
 <br><br>
 Originally envisioned for RAD development in PHP...
@@ -40,11 +40,6 @@ refer to <eglib.tcl> part of this software.
 <br>
 
 License: MIT.<br><br>
-
-Copyright (c) 2023-2024 5 Mode <br>
-Copyright (c) 2021-2023 Alex Plotnikov
-
-<br>
 
 Authors:<br>
 RAXIDE, Daniele Bonini (Last implementation and adaptations.) <br>
