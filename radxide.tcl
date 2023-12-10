@@ -28,7 +28,8 @@
 #
 ###########################################################
 
-package provide radxide 1.2.5
+set version "1.2.6" 
+package provide radxide $version
 
 set _ [package require Tk]
 wm withdraw .
@@ -55,8 +56,17 @@ namespace eval radxide {
   set DEBUG no  ;# debug mode
   
   set dan(WIN) .danwin              ;# main form
-  set dan(WORKDIR) "/home/YourUser/.radxwork"  ;# root working dir
   set dan(TITLE) RADXIDE
+  
+  set tmpfname "~"
+  set userhome [file normalize $tmpfname]
+  if {$userhome eq "/root"} {
+     tk_messageBox -title $dan(TITLE) -icon error -message "RADXIDE can't run under root."
+     exit 0
+  }   
+  
+  set dan(WORKDIR) "$userhome/.radxwork"  ;# working dir
+
   
   # Check workdir existance..
   if {![file exists $dan(WORKDIR)]} {

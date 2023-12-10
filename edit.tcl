@@ -122,7 +122,7 @@ namespace eval edit {
     
     namespace upvar ::radxide dan dan
     
-    tk_messageBox -title $dan(TITLE) -icon info -message "Setup!"   
+    tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' for any variable to customize."   
 	}
 	
 #_______________________

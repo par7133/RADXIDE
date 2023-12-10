@@ -24,7 +24,9 @@ namespace eval menu {
 
 	proc menuScaf {} {
 	
-	  namespace upvar ::radxide dan dan menu menu
+	  namespace upvar ::radxide dan dan menu menu 
+
+    global version
 
 	  set aboutTEXT ""	
 	  #set aboutTEXT "MIT Licence.\n\n\n" 
@@ -68,7 +70,7 @@ namespace eval menu {
 		$m2 add separator
 		$m2 add command -label Options -command { ::radxide::menu::edit::setup } 
 		set m3 [menu $m.help -tearoff 0]
-		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver 1.2.5\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n2019-2021 Tcler's Wiki\n\nhttps://5mode.com\n\n\n"}
+		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver $version\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n2019-2021 Tcler's Wiki\n\nhttps://5mode.com\n\n\n"}
     return $m
 	}
 
