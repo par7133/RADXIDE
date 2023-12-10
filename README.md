@@ -49,6 +49,7 @@ Copyright (c) 2021-2023 Alex Plotnikov
 Authors:<br>
 RAXIDE, Daniele Bonini (Last implementation and adaptations.) <br>
 Alited, Alex Plotnikov (original scaffolding and excerpts.)
+Tcler's Wiki (original excerpts.)
 
 <br><br>
 
