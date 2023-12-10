@@ -47,7 +47,7 @@ RAXIDE, Daniele Bonini (Last implementation and adaptations.) <br>
 Alited, Alex Plotnikov (original scaffolding and excerpts.) <br>
 Tcler's Wiki (original excerpts.)
 
-<br><br>
+<br>
 
 ## Screenshot:
 
