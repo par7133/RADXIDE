@@ -11,7 +11,7 @@ The "Code Library" of the window right pane needs the
 folder $dan(WORKDIR)/.snippets eg:<br> 
 <br> 
 /home/YourUser/.radxwork/.snippets<br><br>
-and must be filled with your examples files tagged with 
+and must be filled with your example files tagged with 
 one [tag] on their names and containg a first line of 
 #comment to give a the menu a descriptive nomenclature:<br>
 <br>
