@@ -43,7 +43,7 @@ License: MIT.<br><br>
 
 Authors:<br>
 RAXIDE, Daniele Bonini (Last implementation and adaptations.) <br>
-Alited, Alex Plotnikov (original scaffolding and excerpts.)
+Alited, Alex Plotnikov (original scaffolding and excerpts.) <br>
 Tcler's Wiki (original excerpts.)
 
 <br><br>
