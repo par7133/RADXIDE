@@ -4,7 +4,7 @@ One more IDE but thought for RAD.
 <br>
 Originally envisioned for RAD development in PHP...
 <br><br>
-The software check for the existance of the Working Dir
+The software checks for the existance of the Working Dir
 in /home/YourUser/.radxwork.
 
 The "Code Library" of the window right pane needs the 
