@@ -5,8 +5,7 @@ One more IDE but thought for RAD.
 Originally envisioned for RAD development in PHP...
 <br><br>
 The software check for the existance of the Working Dir
-in /home/YourUser/.radxwork and must configured for this 
-in radxide.tcl, variable dan(WORKDIR).
+in /home/YourUser/.radxwork.
 
 The "Code Library" of the window right pane needs the 
 folder $dan(WORKDIR)/.snippets eg:<br> 
