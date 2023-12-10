@@ -20,7 +20,7 @@ one [tag] on their names and containg a first line of
 phpinfo();<br>
 <br>
 Please see "examples/_snippets"
-<br>
+<br><br>
 RADXIDE and most of code here presented and distributed contains excerpts 
 from [alited](https://github.com/aplsimple/alited) by Alex Plotnikov and 
 contributors to the project.
