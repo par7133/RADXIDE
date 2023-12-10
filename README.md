@@ -15,7 +15,7 @@ and must be filled with your example files tagged with
 one [tag] on their names and containg a first line of 
 #comment to give a the menu a descriptive nomenclature:<br>
 <br>
-~/.radxwork/.snippets/file[php].inc:<br>
+~/.radxwork/.snippets/file [php].inc:<br>
 #Example of PHP code<br>
 phpinfo();<br>
 <br>
