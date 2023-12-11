@@ -143,6 +143,7 @@ namespace eval filelib {
 		
 		  set fh [open $fname {WRONLY CREAT}]
 		  puts $fh $stxt
+		  chan truncate $fh
 		  close $fh		
 		}
 	}
