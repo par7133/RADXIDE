@@ -27,7 +27,7 @@ RADXIDE enforce the following Project structure:<br>
 <br>
 You can add accessory folders you want them remaining external 
 from the project but remember to add their name in $dan(prjdirignore) 
-eg {.git nbproject} in a way they are ignored by RADXIDE. 
+eg {.git nbproject} in a way they are ignored by RADXIDE.<br> 
 NB: files in the root of the project are ignored by default
 <br><br>
 RADXIDE and most of code here presented and distributed contains excerpts 
