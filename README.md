@@ -21,6 +21,13 @@ phpinfo();<br>
 <br>
 Please see "examples/_snippets"
 <br><br>
+RADXIDE enforce the following Project structure: 
+/Private 
+/Public 
+<br><br>
+You can add accessory folders you want them remaining external 
+from the project but remember to add their name in $dan(prjdirignore)
+<br><br>
 RADXIDE and most of code here presented and distributed contains excerpts 
 from [alited](https://github.com/aplsimple/alited) by Alex Plotnikov and 
 contributors to the project.

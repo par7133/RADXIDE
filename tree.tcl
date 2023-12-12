@@ -275,10 +275,14 @@ namespace eval tree {
 		
 		$tree insert $parent end -id $itemID -text "$title" \
 		    -values [list $fc $fname $isfile $itemID] -open $isopen -image $imgopt
-		
+
 		foreach item [getDirectoryContent $project(ROOT)] {
-		  set itemID [newItemID [incr iit]]
+		  
 		  lassign $item lev isfile fname fcount iroot
+		  #if {([string first $project(ROOT)/Private $fname] eq -1) && ([string first $project(ROOT)/Public $fname] eq -1)} {
+		  #  continue
+		  #}  
+		  set itemID [newItemID [incr iit]]
 		  #if {$selfile eq $fname} {set selID $itemID}
 		  set title [file tail $fname]
 		  if {$iroot<0} {
@@ -286,6 +290,9 @@ namespace eval tree {
 		  } else {
 		    set parent [newItemID [incr iroot]]
 		  }
+		  #if {$parent eq 0 && ((!$isfile && ($title ne "Private") && ($title ne "Public")) || ($isfile))} {
+		  #  continue
+		  #}
 		  set isopen no
 		  if {$isfile} {
 		  
@@ -342,6 +349,8 @@ namespace eval tree {
 		  $tree selection set $selID
 		}
 	}
+
+
 
 # ________________________ delete _________________________ #
 
@@ -495,7 +504,7 @@ namespace eval tree {
 		return $_dirtree
 	}
 
-# ________________________ ignoredDir _________________________ #
+# ________________________ getTree _________________________ #
 
 	proc getTree {{parent {}}} {
 		# Gets a tree or its branch.
@@ -817,32 +826,38 @@ namespace eval tree {
 		set m6 "Open dir"  
 		
 		$popm add command -label $m1 -command { ::radxide::tree::refreshTree }
-		$popm add separator
-		if {$isfile} {
-		  $popm add command -label $m2 -command "::radxide::tree::addFile $ID" -state disabled
-		} else {
-		  $popm add command -label $m2 -command "::radxide::tree::addFile $ID" -state normal
-		}
-		if {$isfile} {  
-  		$popm add command -label $m3 -command "::radxide::tree::renameFile $ID"
-	  	$popm add command -label $m4 -command "::radxide::tree::deleteFile $ID" 
-	  } else {
-	    $popm add command -label $m2f -command "::radxide::tree::addFolder $ID"
-  		if {($fname eq "$project(ROOT)/Public") || ($fname eq "$project(ROOT)/Private")} {
-	  		$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state disabled
-  	  	$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
-  	  } else {
-	  		$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state normal
-  	  	$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
-      }  	  	
-	  }	
-		$popm add separator
-		if {$isfile} {
-		  $popm add command -label $m5 -command "::radxide::tree::openFile $ID" -state normal
-		} else {
-		  $popm add command -label $m5 -command { ::radxide::tree::openFile $ID } -state disabled
-		}  
 		
+		if {$ID ne 0} {
+		
+				$popm add separator
+				if {$isfile} {
+					$popm add command -label $m2 -command "::radxide::tree::addFile $ID" -state disabled
+				} else {
+					$popm add command -label $m2 -command "::radxide::tree::addFile $ID" -state normal
+				}
+				if {$isfile} {  
+					$popm add command -label $m3 -command "::radxide::tree::renameFile $ID"
+					$popm add command -label $m4 -command "::radxide::tree::deleteFile $ID" 
+				} else {
+					$popm add command -label $m2f -command "::radxide::tree::addFolder $ID"
+					if {($fname eq "$project(ROOT)/Public") || ($fname eq "$project(ROOT)/Private")} {
+						$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state disabled
+						$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
+					} else {
+						$popm add command -label $m3f -command "::radxide::tree::renameFolder $ID" -state normal
+						$popm add command -label $m4f -command "::radxide::tree::delFolder $ID" -state disabled
+					}  	  	
+				}	
+				$popm add separator
+				
+				if {$isfile} {
+					$popm add command -label $m5 -command "::radxide::tree::openFile $ID" -state normal
+				} else {
+					$popm add command -label $m5 -command { ::radxide::tree::openFile $ID } -state disabled
+				}  
+    
+    }
+         		
 		set addsel {}
 		if {[llength [$tree selection]]>1} {
 		  if {[$tree tag has tagSel $ID]} {
