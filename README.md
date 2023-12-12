@@ -22,8 +22,8 @@ phpinfo();<br>
 Please see "examples/_snippets"
 <br><br>
 RADXIDE enforce the following Project structure: 
-/Private 
-/Public 
+/Private<br>
+/Public<br>
 <br><br>
 You can add accessory folders you want them remaining external 
 from the project but remember to add their name in $dan(prjdirignore)
