@@ -58,9 +58,13 @@ namespace eval file {
 	  $menu(FILE) entryconfigure $menu(SAVE_AS_ENTRY_IDX) -state disabled
 	  $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state disabled
 	  $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state disabled
+    $menu(EDIT) entryconfigure $menu(UNDO_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(REDO_ENTRY_IDX) -state disabled  
     $menu(EDIT) entryconfigure $menu(COPY_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(INDENT_ENTRY_IDX) -state disabled
+    $menu(EDIT) entryconfigure $menu(UNINDENT_ENTRY_IDX) -state disabled		  
 	  $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state disabled
 	  
@@ -98,8 +102,13 @@ namespace eval file {
 	  $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state disabled		  
 	  $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state disabled
     $menu(FILE) entryconfigure $menu(CLOSE_PROJECT_ENTRY_IDX) -state disabled
+    $menu(EDIT) entryconfigure $menu(UNDO_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(REDO_ENTRY_IDX) -state disabled  
+    $menu(EDIT) entryconfigure $menu(COPY_ENTRY_IDX) -state disabled	  
 	  $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state disabled
+	  $menu(EDIT) entryconfigure $menu(INDENT_ENTRY_IDX) -state disabled
+    $menu(EDIT) entryconfigure $menu(UNINDENT_ENTRY_IDX) -state disabled	    
 	  $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state disabled
 	  $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state disabled
 

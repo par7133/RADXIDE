@@ -62,9 +62,15 @@ namespace eval menu {
 		set m2 [menu $m.edit -tearoff 0]
 		set menu(EDIT) $m2
 		$m add cascade -label Help -menu $m.help
+		$m2 add command -label Undo -command { ::radxide::menu::edit::makeUndo } -accelerator Ctrl+Z -state disabled
+		$m2 add command -label Redo -command { ::radxide::menu::edit::makeRedo } -accelerator Ctrl+Shift+Z -state disabled
+  	$m2 add separator
 		$m2 add command -label Copy -command { ::radxide::menu::edit::makeCopy }  -accelerator Ctrl+C -state disabled
 		$m2 add command -label Paste -command { ::radxide::menu::edit::makePaste } -accelerator Ctrl+P -state disabled
 		$m2 add command -label Cut -command { ::radxide::menu::edit::makeCut } -accelerator Ctrl+X -state disabled
+		$m2 add separator
+		$m2 add command -label Indent -command { ::radxide::menu::edit::Indent } -accelerator Ctrl+T -state disabled
+		$m2 add command -label UnIndent -command { ::radxide::menu::edit::UnIndent } -accelerator Alt+T -state disabled
 		$m2 add separator
 		$m2 add command -label Find -command { ::radxide::menu::edit::find } -accelerator Ctrl+F -state disabled
 		$m2 add command -label "Go to Line" -command { ::radxide::menu::edit::GotoLine } -accelerator Ctrl+G -state disabled
@@ -86,13 +92,17 @@ namespace eval menu {
  	  bind $ctrl "<Control-s>" { ::radxide::menu::file::saveFile }
  	  bind $ctrl "<Control-Alt-x>" { ::radxide::menu::file::closeProject }
  	  bind $ctrl "<Control-q>" { ::radxide::menu::file::quit }
+ 		bind $ctrl "<Control-t>" { ::radxide::menu::edit::Indent }
+ 		bind $ctrl "<Alt-t>" { ::radxide::menu::edit::UnIndent } 		
+    bind $ctrl "<Control-z>" "::radxide::menu::edit::makeUndo"
+    bind $ctrl "<Control-Shift-z>" "::radxide::menu::edit::makeRedo"    
  	  bind $ctrl "<Control-c>" "::radxide::menu::edit::makeCopy"
  	  bind $ctrl "<Control-p>" "::radxide::menu::edit::makePaste"
  	  bind $ctrl "<Control-x>" "::radxide::menu::edit::makeCut"
  	  bind $ctrl "<Control-f>" "::radxide::menu::edit::find"
 		bind $ctrl "<Control-g>" "::radxide::menu::edit::GotoLine"
 		bind $ctrl "<Return>" "::radxide::win::setNewLineWithIndent" 
-		bind $ctrl "<Tab>" "::radxide::win::insertTab"
+		#bind $ctrl "<Tab>" "::radxide::win::insertTab"
 		
 	}	
 	

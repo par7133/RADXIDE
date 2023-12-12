@@ -651,13 +651,19 @@ namespace eval tree {
 	    $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state normal
 	    $menu(FILE) entryconfigure $menu(SAVE_AS_ENTRY_IDX) -state normal
 	    $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state normal
+	    $menu(EDIT) entryconfigure $menu(UNDO_ENTRY_IDX) -state normal
+	    $menu(EDIT) entryconfigure $menu(REDO_ENTRY_IDX) -state normal
 	    $menu(EDIT) entryconfigure $menu(COPY_ENTRY_IDX) -state normal
 	    $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state normal	    
+	    $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state normal	
+	    $menu(EDIT) entryconfigure $menu(INDENT_ENTRY_IDX) -state normal
+	    $menu(EDIT) entryconfigure $menu(UNINDENT_ENTRY_IDX) -state normal	    
 	    $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state normal
 	    $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state normal	    
 	    
 	    set project(CUR_FILE_PATH) $fname
+	    
+	    $dan(TEXT) edit reset
 	    
 	    focus $dan(TEXT)
 	    ::tk::TextSetCursor $dan(TEXT) @0,0

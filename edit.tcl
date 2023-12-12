@@ -72,8 +72,62 @@ namespace eval edit {
 		    -head "Go to line:" {*}$args] res}
     }
 	}
-	
+
+# ________________________ Indent _________________________ #
+
+
+	proc Indent {} {
+		# Indent selected lines of text.
+
+		namespace upvar ::radxide dan dan
+
+		#tk_messageBox -title $dan(TITLE) -icon info -message "Indent start"   
+
+		set indent $dan(TAB_IN_SPACE)
+		set len [string length $dan(TAB_IN_SPACE)]
+		set sels [SelectedLines]
+		set wtxt [lindex $sels 0]
+		#::apave::undoIn $wtxt
+		foreach {l1 l2} [lrange $sels 1 end] {
+		  for {set l $l1} {$l<=$l2} {incr l} {
+		    set line [$wtxt get $l.0 $l.end]
+		    if {[string trim $line] eq {}} {
+		      $wtxt replace $l.0 $l.end {}
+		    } else {
+		      set leadsp [leadingSpaces $line]
+		      set sp [expr {$leadsp % $len}]
+		      # align by the indent edge
+		      if {$sp==0} {
+		        set ind $indent
+		      } else {
+		        set ind [string repeat " " [expr {$len - $sp}]]
+		      }
+		      $wtxt insert $l.0 $ind
+		    }
+		  }
+		}
+		#::apave::undoOut $wtxt
+		#alited::main::HighlightLine
+		
+		focus $dan(TEXT)
+		
+		#tk_messageBox -title $dan(TITLE) -icon info -message "Indent end"   
+		
+	}
+
+# ________________________ leadingSpaces _________________________ #
+
+
+	proc leadingSpaces {line} {
+		# Returns a number of leading spaces of a line
+		#   line - the line
+
+		return [expr {[string length $line]-[string length [string trimleft $line]]}]
+	}
+
+
 # ________________________ makeCopy _________________________ #
+
 
 	proc makeCopy {} {
     # Copy from the editor to the clipboard
@@ -99,6 +153,10 @@ namespace eval edit {
     set t $dan(TEXT)
     
     tk_textCut $t
+    
+    after 200 [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"]
+    $dan(TEXT) yview [$dan(TEXT) index insert] 
+    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
 	}
 	
 #_________________________ makePaste ________________________ #
@@ -113,9 +171,90 @@ namespace eval edit {
     set t $dan(TEXT)
     
     tk_textPaste $t    
+    
+    after 1000 [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"] 
+    $dan(TEXT) yview [$dan(TEXT) index insert] 
+    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+
+	}
+
+#_________________________ makeRedo ________________________ #
+
+
+	proc makeRedo {} {
+    # Paste from the clipboard to the editor
+    #set canvas %W
+    #eval [clipboard get -type TkCanvasItem]
+    
+    namespace upvar ::radxide dan dan
+    
+    set t $dan(TEXT)
+    
+    catch {$t edit redo}
+    
+    after idle [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"] 
+    $dan(TEXT) yview [$dan(TEXT) index insert] 
+    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+
+	}
+
+#_________________________ makeUndo ________________________ #
+
+
+	proc makeUndo {} {
+    # Paste from the clipboard to the editor
+    #set canvas %W
+    #eval [clipboard get -type TkCanvasItem]
+    
+    namespace upvar ::radxide dan dan
+    
+    set t $dan(TEXT)
+    
+    catch {$t edit undo}   
+    
+    after idle [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"]
+    $dan(TEXT) yview [$dan(TEXT) index insert] 
+    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+
+	}
+
+# ________________________ SelectedLines _________________________ #
+
+
+	proc SelectedLines {{wtxt ""} {strict no}} {
+		# Gets a range of lines of text that are selected at least partly.
+		#   wtxt - text's path
+		#   strict - if yes, only a real selection is counted
+		# Returns a list of the text widget's path and ranges of selected lines.
+
+		namespace upvar ::radxide dan dan
+
+		if {$wtxt eq {}} {set wtxt $dan(TEXT)}
+		set res [list $wtxt]
+		if {[catch {$wtxt tag ranges sel} sels] || ![llength $sels]} {
+		  if {$strict} {
+		    set sels [list]
+		  } else {
+		    set pos1 [set pos2 [$wtxt index insert]]
+		    set sels [list $pos1 $pos2]
+		  }
+		}
+		foreach {pos1 pos2} $sels {
+		  if {$pos1 ne {}} {
+		    set pos21 [$wtxt index "$pos2 linestart"]
+		    if {[$wtxt get $pos21 $pos2] eq {}} {
+		      set pos2 [$wtxt index "$pos2 - 1 line"]
+		    }
+		  }
+		  set l1 [expr {int($pos1)}]
+		  set l2 [expr {max($l1,int($pos2))}]
+		  lappend res $l1 $l2
+		}
+		return $res
 	}
 
 #_________________________ setup ________________________ #
+
 
 	proc setup {} {
     # Open the Options window
@@ -124,7 +263,43 @@ namespace eval edit {
     
     tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' for any variable to customize."   
 	}
-	
+
+# ________________________ UnIndent _________________________ #
+
+
+	proc UnIndent {} {
+		# Unindent selected lines of text.
+
+		namespace upvar ::radxide dan dan
+
+    #tk_messageBox -title $dan(TITLE) -icon info -message "start UnIndent"   
+
+		set len [string length $dan(TAB_IN_SPACE)]
+		set spaces [list { } \t]
+		set sels [SelectedLines]
+		set wtxt [lindex $sels 0]
+		#::apave::undoIn $wtxt
+		foreach {l1 l2} [lrange $sels 1 end] {
+		  for {set l $l1} {$l<=$l2} {incr l} {
+		    set line [$wtxt get $l.0 $l.end]
+		    if {[string trim $line] eq {}} {
+		      $wtxt replace $l.0 $l.end {}
+		    } elseif {[string index $line 0] in $spaces} {
+		      set leadsp [leadingSpaces $line]
+		      # align by the indent edge
+		      set sp [expr {$leadsp % $len}]
+		      if {$sp==0} {set sp $len}
+		      $wtxt delete $l.0 "$l.0 + ${sp}c"
+		    }
+		  }
+		}
+		#::apave::undoOut $wtxt
+		
+		focus $dan(TEXT)
+		
+    #tk_messageBox -title $dan(TITLE) -icon info -message "end UnIndent"   
+	}
+
 #_______________________
 
 }

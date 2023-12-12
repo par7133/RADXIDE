@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.3.1" 
+set version "1.3.5" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -175,11 +175,15 @@ namespace eval radxide {
   set menu(SAVE_ENTRY_IDX) 5;
   set menu(CLOSE_ENTRY_IDX) 7;
   set menu(CLOSE_PROJECT_ENTRY_IDX) 8;      
-  set menu(COPY_ENTRY_IDX) 0;
-  set menu(PASTE_ENTRY_IDX) 1;
-  set menu(CUT_ENTRY_IDX) 2;
-  set menu(FIND_ENTRY_IDX) 4;    
-  set menu(GOTO_ENTRY_IDX) 5;
+  set menu(UNDO_ENTRY_IDX) 0;
+  set menu(REDO_ENTRY_IDX) 1;
+  set menu(COPY_ENTRY_IDX) 3;
+  set menu(PASTE_ENTRY_IDX) 4;
+  set menu(CUT_ENTRY_IDX) 5;
+  set menu(INDENT_ENTRY_IDX) 7;
+  set menu(UNINDENT_ENTRY_IDX) 8;
+  set menu(FIND_ENTRY_IDX) 10;    
+  set menu(GOTO_ENTRY_IDX) 11;
   
   # a couplle of extension definitions..
   set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny .inc}     ;# extensions of php files
