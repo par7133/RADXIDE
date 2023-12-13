@@ -76,12 +76,10 @@ namespace eval edit {
 # ________________________ Indent _________________________ #
 
 
-	proc Indent {} {
+	proc Indent {{from "event"}} {
 		# Indent selected lines of text.
 
 		namespace upvar ::radxide dan dan
-
-		#tk_messageBox -title $dan(TITLE) -icon info -message "Indent start"   
 
 		set indent $dan(TAB_IN_SPACE)
 		set len [string length $dan(TAB_IN_SPACE)]
@@ -111,8 +109,9 @@ namespace eval edit {
 		
 		focus $dan(TEXT)
 		
-		#tk_messageBox -title $dan(TITLE) -icon info -message "Indent end"   
-		
+		if {$from eq "event"} {
+		  return -code break
+		}  
 	}
 
 # ________________________ leadingSpaces _________________________ #
@@ -129,7 +128,7 @@ namespace eval edit {
 # ________________________ makeCopy _________________________ #
 
 
-	proc makeCopy {} {
+	proc makeCopy {{from "event"}} {
     # Copy from the editor to the clipboard
     #clipboard clear
     #clipboard append $txt
@@ -139,11 +138,15 @@ namespace eval edit {
     set t $dan(TEXT)
     
     tk_textCopy $t
+    
+    if {$from eq "event"} {
+		  return -code break
+		}  
 	}
 
 #_________________________ makeCut ________________________ #
 
-	proc makeCut {} {
+	proc makeCut {{from "event"}} {
     # Cut from the editor to the clipboard
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
@@ -154,14 +157,56 @@ namespace eval edit {
     
     tk_textCut $t
     
-    after 200 [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"]
-    $dan(TEXT) yview [$dan(TEXT) index insert] 
-    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    after 1000 "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223"
+    #$dan(TEXT) yview [$dan(TEXT) index insert] 
+    #$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    
+    if {$from eq "event"} {
+		  return -code break
+		}  
 	}
+
+# ________________________ makeNewLine _________________________ #
+
+
+  proc makeNewLine {} {
+  
+    namespace upvar ::radxide dan dan
+  
+    set wt $dan(TEXT)
+
+    # getting previous line
+    set idx1 [$wt index {insert linestart}]
+    set idx2 [$wt index {insert lineend}]
+    set line [$wt get $idx1 $idx2]
+    
+    # erasing tabs, replacing them with spaces..
+    set line [string map {\t $dan(TAB_IN_SPACE)} $line]
+
+    # calculating identation..
+    set orilength [string length $line]
+    set newlength [string length [string trimleft $line]]   
+        
+    set nspacesofindent [expr $orilength - $newlength] 
+      
+    # inserintg correct identation..
+	  $wt insert [$wt index {insert}] \n[string repeat " " $nspacesofindent]  
+
+	  set idx3 [$wt index insert]
+	  set idx4 [$wt index "$idx3 +1 line"]
+	  ::tk::TextSetCursor $wt $idx3
+		  
+    ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"
+    #$dan(TEXT) yview [$dan(TEXT) index insert] 
+    #$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]             
+
+    return -code break
+
+  }
 	
 #_________________________ makePaste ________________________ #
 
-	proc makePaste {} {
+	proc makePaste {{from "event"}} {
     # Paste from the clipboard to the editor
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
@@ -172,16 +217,20 @@ namespace eval edit {
     
     tk_textPaste $t    
     
-    after 1000 [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"] 
-    $dan(TEXT) yview [$dan(TEXT) index insert] 
-    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    after 1000 "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223" 
+    #$dan(TEXT) yview [$dan(TEXT) index insert] 
+    #$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+
+    if {$from eq "event"} {
+		  return -code break
+		}  
 
 	}
 
 #_________________________ makeRedo ________________________ #
 
 
-	proc makeRedo {} {
+	proc makeRedo {{from "event"}} {
     # Paste from the clipboard to the editor
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
@@ -192,16 +241,19 @@ namespace eval edit {
     
     catch {$t edit redo}
     
-    after idle [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"] 
-    $dan(TEXT) yview [$dan(TEXT) index insert] 
-    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    after idle "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223" 
+    #$dan(TEXT) yview [$dan(TEXT) index insert] 
+    #$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
 
+    if {$from eq "event"} {
+		  return -code break
+		}  
 	}
 
 #_________________________ makeUndo ________________________ #
 
 
-	proc makeUndo {} {
+	proc makeUndo {{from "event"}} {
     # Paste from the clipboard to the editor
     #set canvas %W
     #eval [clipboard get -type TkCanvasItem]
@@ -212,9 +264,13 @@ namespace eval edit {
     
     catch {$t edit undo}   
     
-    after idle [::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223"]
-    $dan(TEXT) yview [$dan(TEXT) index insert] 
-    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    after idle "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223"
+    #$dan(TEXT) yview [$dan(TEXT) index insert] 
+    #$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] 
+    
+    if {$from eq "event"} {
+		  return -code break
+		}  
 
 	}
 
@@ -261,18 +317,16 @@ namespace eval edit {
     
     namespace upvar ::radxide dan dan
     
-    tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' for any variable to customize."   
+    tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' to customize any variable."   
 	}
 
 # ________________________ UnIndent _________________________ #
 
 
-	proc UnIndent {} {
+	proc UnIndent {{from "event"}} {
 		# Unindent selected lines of text.
 
 		namespace upvar ::radxide dan dan
-
-    #tk_messageBox -title $dan(TITLE) -icon info -message "start UnIndent"   
 
 		set len [string length $dan(TAB_IN_SPACE)]
 		set spaces [list { } \t]
@@ -297,7 +351,9 @@ namespace eval edit {
 		
 		focus $dan(TEXT)
 		
-    #tk_messageBox -title $dan(TITLE) -icon info -message "end UnIndent"   
+		if {$from eq "event"} {
+		  return -code break
+		}  
 	}
 
 #_______________________

@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.3.6" 
+set version "1.3.8" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -87,8 +87,12 @@ namespace eval radxide {
   set dan(TEXTBG) "#222223"
   set dan(TEXTFG) "#55ff55"
   set dan(TEXTSELFG) "red"
+  set dan(TEXTFONT) "Monospace Semi-Condensed"
+  set dan(TEXTFONTSIZE) "10"
   set dan(CURSORCOLOR) "red"
-  set dan(CURSORWIDTH) "4"
+  set dan(CURSORWIDTH) "5"
+  set dan(TOTLINES) 1
+  set dan(CUR_FILE_MAX_YVIEW) 1.0
   set dan(prjdirignore) {.git nbproject} ;# ignored subdirectories of project
   
   set project(NAME) ""              ;# project default name

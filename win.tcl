@@ -882,6 +882,7 @@ namespace eval win {
     set i 1
     set gcont [list]
     set totlines [expr [$txt count -lines 0.0 end]]
+    set dan(TOTLINES) $totlines
     while true {
       if {$i > $totlines} break
       #set dline [$txt dlineinfo $i] ;# xxx
@@ -905,9 +906,25 @@ namespace eval win {
       $canvas insert [expr {$y}].0 $linenum
     }
 
-    $canvas configure -state disabled
+    set oldval [$dan(GUTTEXT) yview]
+    $dan(GUTTEXT) yview $dan(TOTLINES).0
+    set dan(CUR_FILE_MAX_YVIEW) [lindex [$dan(GUTTEXT) yview] 0]
+    #$dan(GUTTEXT) yview [lindex $oldval 1]
+    $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 0] 
+
+    #$dan(TEXT) yview 1.0
+    #set ww [list .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText]
+    #.danwin.fra.pan.fra2.yscroll2 set {*}[.danwin.fra.pan.fra2.yscroll1 get]
+    #catch {list $dan(GUTTEXT) yview moveto [string range [lindex [$dan(TEXT) yview] 0] 0 2]}
+    #list ::radxide::win::Yview $ww yes {*}[.danwin.fra.pan.fra2.yscroll1 get]
     
-    #return 2
+    $canvas configure -state disabled
+
+    catch {
+      return -code break
+    }
+    
+    #return 0
   }
 
 
@@ -1883,6 +1900,8 @@ namespace eval win {
   # Scrollbars amenities
   proc Yset {widgets master sb args} {
    
+    namespace upvar ::radxide dan dan
+   
     if {$master eq "master"} {
       #list $sb set [expr [lindex $args 0]] [expr [lindex $args 1]]
       
@@ -1899,7 +1918,14 @@ namespace eval win {
     
     #::radxide::win::Yview $myw moveto [lindex $args 0]
     #::radxide::win::Yview [lrange $widgets 0 0] moveto [lindex $args 0]
-    ::radxide::win::Yview $widgets no moveto [lindex $args 0]
+
+ 		#.danwin.fra.pan.fra3.body.text delete 1.0 end
+		#.danwin.fra.pan.fra3.body.text insert end [expr [lindex $args 0]]
+    if {[expr [lindex $args 0]] > [expr $dan(CUR_FILE_MAX_YVIEW) - 0.01]} {
+      ::radxide::win::Yview $widgets no moveto [lindex $args 1]
+    } else {
+      ::radxide::win::Yview $widgets no moveto [lindex $args 0]
+    }
 
   }
   
@@ -1912,7 +1938,8 @@ namespace eval win {
     }
     
     if ($callfromsbmaster) {
-      catch {list $w2.gutText yview moveto [lindex [$dan(TEXT) yview] 1]}
+      #catch {list $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 0]}
+      #catch {list $dan(GUTTEXT) yview moveto [string range [lindex [$dan(TEXT) yview] 0] 0 2]}
     }  
   } 
   
@@ -1950,16 +1977,26 @@ namespace eval win {
 		  # main pane (panR)
 		  pack [set w2 [ttk::panedwindow $pan.fra2 -orient horizontal]] -side left -fill both -expand 1
 		  set panR [$pan add $pan.fra2]
-		  text $w2.gutText -background "lightgray" -foreground "#222223" -font "Monospace 10" -width 5
-		  text $w2.text -font "monospace 10" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -wrap none -undo yes
+		  if {[string first " " $dan(TEXTFONT)]} {
+		    set myfont "\"$dan(TEXTFONT)\""
+		  } else {
+		    set myfont $dan(TEXTFONT)
+		  }
+		  set myfontsize $dan(TEXTFONTSIZE)
+		  text $w2.gutText -background "lightgray" -foreground "#222223" -font "$myfont $myfontsize" -width 5
+		  text $w2.text -font "$myfont $myfontsize" -bd 0 -padx 13 -spacing1 0 -spacing2 0 -spacing3 0 -exportselection yes -width 115 -wrap none -undo yes
 		  set ww [list .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText]
 		  $w2.text configure -xscrollcommand [list $w2.xscroll set]
 		  scrollbar $w2.xscroll -orient horizontal \
 		    -command [list $w2.text xview]
+		    
+		  #scrollbar $w2.yscroll1 -orient vertical \
+		  #  -command [list ::radxide::win::Yview $ww yes]
 		  scrollbar $w2.yscroll1 -orient vertical \
-		    -command [list ::radxide::win::Yview $ww yes]
+		    -command [list $w2.text yview]
 		  scrollbar $w2.yscroll2 -orient vertical \
-		    -command [list $w2.gutText yview]		    
+		    -command [list $w2.gutText yview]		   
+		     
 		  set ssbb [list .danwin.fra.pan.fra2.yscroll1 .danwin.fra.pan.fra2.yscroll2]  
 		  $w2.text configure -yscrollcommand [list ::radxide::win::Yset $ww master $ssbb]
 		  $w2.gutText configure -yscrollcommand [list .danwin.fra.pan.fra2.yscroll2 set]		    
@@ -1977,7 +2014,12 @@ namespace eval win {
 		  # set colors
 		  $dan(TEXT) configure -background $dan(TEXTBG) -foreground $dan(TEXTFG)
 		  $dan(TEXT) configure -selectforeground $dan(TEXTSELFG)
- 		  $dan(TEXT) configure -insertbackground $dan(CURSORCOLOR) -insertwidth $dan(CURSORWIDTH);
+ 		  $dan(TEXT) configure -insertbackground $dan(CURSORCOLOR) 
+ 		  if {$dan(CURSORWIDTH) > 4} {
+   		  $dan(TEXT) configure -blockcursor true
+   		} else {  
+  		  $dan(TEXT) configure -insertwidth $dan(CURSORWIDTH);
+  		}  
  		  	  
 		  # code library
 		  pack [set w3 [frame $pan.fra3 -background $bg]] -side left -fill y -expand 1;
@@ -1985,12 +2027,64 @@ namespace eval win {
 		  ::radxide::eglib::create $w3
 		  
 		  # update gutter, key bindings     
-      bind $dan(TEXT) "<Return>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] }
-      bind $dan(TEXT) "<BackSpace>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] }
-      bind $dan(TEXT) "<Delete>" {::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1] }
+      #bind $dan(TEXT) "<Enter>" "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223 ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]"
+      #bind $dan(TEXT) "<BackSpace>" "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223 ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]"
+      #bind $dan(TEXT) "<Delete>" "::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223 ;$dan(TEXT) yview [$dan(TEXT) index insert] ;$dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]"
       bind $tree "<ButtonPress>" {after idle {::radxide::tree::buttonPress %b %x %y %X %Y}}
       bind $tree "<ButtonRelease>" {after idle {::radxide::tree::buttonRelease %b %s %x %y %X %Y}}      
-      
+      bind $dan(TEXT) "<KeyPress>" {
+        switch %K {
+          #KP_Enter {
+          #  ::radxide::menu::edit::makeNewLine
+          #}
+          #Return {
+          #  ::radxide::menu::edit::makeNewLine
+          #}
+          Tab {
+            ::radxide::menu::edit::Indent 
+          }
+          Shift_L-Tab {
+            ::radxide::menu::edit::UnIndent
+          }
+          ISO_Left_Tab {
+            ::radxide::menu::edit::UnIndent
+          }
+          ISO_Right_Tab {
+            ::radxide::menu::edit::UnIndent
+          }          
+          #Shift_L {
+          #}
+          #Shift_R {
+          #}
+          #default {
+          #  tk_messageBox -title radxide -icon info -message %K
+          #}
+        }  
+      }
+   	  bind $dan(TEXT) "<KeyRelease>" {
+        switch %K {
+          #KP_Enter {
+          #  ::radxide::menu::edit::makeNewLine
+          #}
+          #Return {
+          #  ::radxide::menu::edit::makeNewLine
+          #}
+          BackSpace {
+            ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223
+          }
+          Delete {
+            ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223
+          }
+          Cancel {
+            ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 #FFFFFF #222223
+          }
+          Tab {
+          }
+          #default {
+          #  tk_messageBox -title radxide -icon info -message %K
+          #}          
+        }  
+      }
    	}
 		#wm title $wtop ttl  
  	  
@@ -3218,54 +3312,6 @@ namespace eval win {
     # Creates bindings to highlight matches in a text.
     #   w - path to the text
 
-  }
-
-# ________________________ setNewLineWithIndent _________________________ #
-
-  proc setNewLineWithIndent {} {
-  
-    namespace upvar ::radxide dan dan
-  
-    set wt $dan(TEXT)
-
-    # getting previous line
-    set idx1 [$wt index {insert linestart}]
-    set idx2 [$wt index {insert lineend}]
-    set line [$wt get $idx1 $idx2]
-    
-    # erasing tabs, replacing them with spaces..
-    set line [string map {\t $dan(TAB_IN_SPACE)} $line]
-
-    # calculating identation..
-    set orilength [string length $line]
-    set newlength [string length [string trimleft $line]]   
-    if {$newlength <= 0} {
-      # case previous line is only spaces..
-      
-      set $newlength 0
-      set nindent 0   
-      
-      ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;
-      $dan(TEXT) yview [$dan(TEXT) index insert] 
-      $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]             
-      
-      return 0
-    } else {
-    
-      set nspacesofindent [expr $orilength - $newlength] 
-      
-      # inserintg correct identation..
-		  $wt insert [$wt index {insert}] \n[string repeat " " $nspacesofindent]  
-		  set idx3 [$wt index insert]
-		  set idx4 [$wt index "$idx3 +1 line"]
-		  ::tk::TextSetCursor $wt $idx3
-		  
-      ::radxide::win::fillGutter .danwin.fra.pan.fra2.text .danwin.fra.pan.fra2.gutText 5 1 "#FFFFFF" "#222223" ;
-      $dan(TEXT) yview [$dan(TEXT) index insert] 
-      $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 1]             
-		  
-      return -code break
-    }      
   }
   
 # ________________________ setTextBinds _________________________ #
