@@ -21,7 +21,7 @@ phpinfo();<br>
 <br>
 Please see "examples/_snippets"
 <br><br>
-RADXIDE enforce the following Project structure:<br>
+RADXIDE enforces the following Project structure:<br>
 /Private<br>
 /Public<br>
 <br>
