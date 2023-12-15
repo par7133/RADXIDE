@@ -25,10 +25,10 @@ RADXIDE enforce the following Project structure:<br>
 /Private<br>
 /Public<br>
 <br>
-You can add accessory folders you want them remaining external 
-from the project but remember to add their name in $dan(prjdirignore) 
+You can exclude folders from the project by adding 
+their name to $dan(prjdirignore) 
 eg {.git nbproject} in a way they are ignored by RADXIDE.<br> 
-NB: files in the root of the project are ignored by default
+NB: files and folders in the root of the project are ignored by default
 <br><br><br><br>
 RADXIDE and most of code here presented and distributed contains excerpts 
 from [alited](https://github.com/aplsimple/alited) by Alex Plotnikov and 
