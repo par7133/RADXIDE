@@ -447,7 +447,10 @@ namespace eval tree {
 		# 1. skip the ignored ones
 		for {set i [llength $dcont]} {$i} {} {
 		  incr i -1
-		  if {[ignoredDir [lindex $dcont $i]]} {
+		  #if {$lev eq 1} {
+		  #  tk_messageBox -title $dan(TITLE) -icon error -message [lindex $dcont $i]
+		  #}
+		  if {[ignoredDir [lindex $dcont $i]] || (($lev eq 1) && (([file tail [lindex $dcont $i]] ne "Private") && ([file tail [lindex $dcont $i]] ne "Public")))} {
 		    set dcont [lreplace $dcont $i $i]
 		  }
 		}

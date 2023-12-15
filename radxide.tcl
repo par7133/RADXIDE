@@ -68,7 +68,6 @@ namespace eval radxide {
   }   
   
   set dan(WORKDIR) "$userhome/.radxwork"  ;# working dir
-
   
   # Check workdir existance..
   if {![file exists $dan(WORKDIR)]} {
