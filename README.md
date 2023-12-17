@@ -28,8 +28,8 @@ RADXIDE enforces the following Project structure:<br>
 You can exclude folders from the project by adding 
 their name to $dan(prjdirignore) 
 eg {.git nbproject} in a way they are ignored by RADXIDE.<br> 
-NB: files and folders in the root of the project are ignored by default
-<br><br><br><br>
+NB: files and folders in the root of the project are ignored by default.
+<br><br><br>
 RADXIDE and most of code here presented and distributed contains excerpts 
 from [alited](https://github.com/aplsimple/alited) by Alex Plotnikov and 
 contributors to the project.
