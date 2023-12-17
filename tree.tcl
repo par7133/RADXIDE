@@ -276,6 +276,13 @@ namespace eval tree {
 		$tree insert $parent end -id $itemID -text "$title" \
 		    -values [list $fc $fname $isfile $itemID] -open $isopen -image $imgopt
 
+		set dan(_dirignore) [list]
+		catch {    ;# there might be an incorrect list -> catch it
+		  foreach d $dan(prjdirignore) {
+		    lappend dan(_dirignore) [string toupper [string trim $d \"]]
+		     }  
+		}
+
 		foreach item [getDirectoryContent $project(ROOT)] {
 		  
 		  lassign $item lev isfile fname fcount iroot
@@ -447,9 +454,6 @@ namespace eval tree {
 		# 1. skip the ignored ones
 		for {set i [llength $dcont]} {$i} {} {
 		  incr i -1
-		  #if {$lev eq 1} {
-		  #  tk_messageBox -title $dan(TITLE) -icon error -message [lindex $dcont $i]
-		  #}
 		  if {[ignoredDir [lindex $dcont $i]] || (($lev eq 1) && (([file tail [lindex $dcont $i]] ne "Private") && ([file tail [lindex $dcont $i]] ne "Public")))} {
 		    set dcont [lreplace $dcont $i $i]
 		  }
@@ -495,14 +499,14 @@ namespace eval tree {
 		# Returns a list containing the directory's content.
 
 		namespace upvar ::radxide dan dan _dirtree _dirtree
-		set _dirtree [set dan(_dirignore) [list]]
+#		set _dirtree [set dan(_dirignore) [list]]
 		set _dirtree [list]
-		catch {    ;# there might be an incorrect list -> catch it
-		  foreach d $dan(prjdirignore) {
-		    lappend dan(_dirignore) [string toupper [string trim $d \"]]
-		  }
-		}
-		lappend dan(_dirignore) [string toupper [file tail [::radxide::Tclexe]]]
+#		catch {    ;# there might be an incorrect list -> catch it
+#		  foreach d $dan(prjdirignore) {
+#		    lappend dan(_dirignore) [string toupper [string trim $d \"]]
+#		  }
+#		}
+#		lappend dan(_dirignore) [string toupper [file tail [::radxide::Tclexe]]]
 		dirContent $dirname
 		return $_dirtree
 	}
