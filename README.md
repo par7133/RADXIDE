@@ -27,7 +27,8 @@ RADXIDE enforces the following Project structure:<br>
 <br>
 Setting dan(MAXFILES) you define how many files max the
 project can contain. Setting dan(MAXFILESIZE) you define the 
-max size of the file RADXIDE can handle.
+max size of the file RADXIDE can handle.<br>
+The defaults are some good ones, but in the need you know what to change.
 <br><br>
 You can exclude folders from the project by adding 
 their name to $dan(prjdirignore) 
