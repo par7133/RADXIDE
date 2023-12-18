@@ -139,7 +139,7 @@ namespace eval radxide {
   set dan(fgbranch) "blue"    
   set dan(CHARFAMILY) "Sans"
   set dan(CHARSIZE) 10
-  set dan(MAXFILES) 250
+  set dan(MAXFILES) 1000
   set dan(MAXFILESIZE) 65534
   set dan(MAXFINDLENGTH) 50 
   set dan(TAB_IN_SPACE) "  "
