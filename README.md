@@ -25,6 +25,10 @@ RADXIDE enforces the following Project structure:<br>
 /Private<br>
 /Public<br>
 <br>
+Setting dan(MAXFILES) you define how many files max the
+project can contain. Setting dan(MAXFILESIZE) you define the 
+max size of the file RADXIDE can handle.
+<br><br>
 You can exclude folders from the project by adding 
 their name to $dan(prjdirignore) 
 eg {.git nbproject} in a way they are ignored by RADXIDE.<br> 
