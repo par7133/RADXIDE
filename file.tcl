@@ -297,37 +297,38 @@ namespace eval file {
       set initialdir [string range $project(CUR_FILE_PATH) 0 [expr [string last "/" $project(CUR_FILE_PATH)]-1]]
       set initialfile [string range $project(CUR_FILE_PATH) [expr [string last "/" $project(CUR_FILE_PATH)]+1] end]
       
-			set types {
-					{{HTML Files}       {.html}       }					
-					{{PHP Files}        {.php}        }
-					{{INC Files}        {.inc}        }
-					{{All Files}        *             }
-			}
-			set orifilepath [tk_getSaveFile -initialdir $initialdir -initialfile $initialfile -filetypes $types -defaultextension .php]
+								set types {
+										{{HTML Files}       {.html}       }					
+										{{PHP Files}        {.php}        }
+										{{INC Files}        {.inc}        }
+										{{All Files}        *             }
+								}
+								set orifilepath [tk_getSaveFile -initialdir $initialdir -initialfile $initialfile -filetypes $types -defaultextension .php]
+								
+								if {$orifilepath eq ""} {return}
+								
+								# Check: Parent path must equal to Working Dir..
+								if {([string first $project(ROOT)/Private $orifilepath] eq -1) && ([string first $project(ROOT)/Public $orifilepath] eq -1)} {
+								
+			      tk_messageBox -title $dan(TITLE) -icon error -message "File must be saved inside a valid destination in the Working Dir ($project(ROOT)) !"			
+										return
+								}			
 			
-			if {$orifilepath eq ""} {return}
-			
-			# Check: Parent path must equal to Working Dir..
-			if {([string first $project(ROOT)/Private $orifilepath] eq -1) && ([string first $project(ROOT)/Public $orifilepath] eq -1)} {
-			
-	      tk_messageBox -title $dan(TITLE) -icon error -message "File must be saved inside a valid destination in the Working Dir ($project(ROOT)) !"			
-				return
-				
-			}			
-			
-		  set fname $orifilepath
-		  
-		} else {   
+					  set fname $orifilepath
+			  
+					} else {   
 
-		  set fname $project(CUR_FILE_PATH)
-
-    }
+						 set fname $project(CUR_FILE_PATH)
+			    }
 		  
-	  set t $dan(TEXT)
-	  set stxt [string trim [$t get 1.0 end]]
-	   
-	  ::radxide::filelib::saveFile $fname $stxt
- 
+		  set t $dan(TEXT)
+		  set stxt [string trim [$t get 1.0 end]]
+	    
+	   if {![file writable $fname]} { 
+      tk_messageBox -title $dan(TITLE) -icon error -message "File not writable!"			
+	   } else {
+  		   ::radxide::filelib::saveFile $fname $stxt
+  		    }
   }
 
 #_________________________ saveFileAs ______________________ #
@@ -342,9 +343,9 @@ namespace eval file {
     
     namespace upvar ::radxide project project
 
-		if {$project(CUR_FILE_PATH) ne ""} {
+    if {$project(CUR_FILE_PATH) ne ""} {
       saveFileByName yes
-    }
+         }
 	}
 
 #_________________________ saveFile ______________________ #

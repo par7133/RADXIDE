@@ -107,26 +107,19 @@ namespace eval filelib {
 		#   reload - if yes, loads the file even if it has a "strange" extension
 		#   islist - if yes, *fnames* is a file list
 		#   Message - name of procedure for "open file" message
-    # Return the content of the file
+  # Return the content of the file
     
     namespace upvar ::radxide dan dan
 
     set ret ""
 
-    if {$fname ne ""} {
-
-		  if {[file size $fname] > $dan(MAXFILESIZE)} {
-		    tk_messageBox -title $dan(TITLE) -icon error -message "File exceed MAXFILESIZE=$dan(MAXFILESIZE)"
-		    return $ret
-		  }
-
-			set fh [open $fname {RDONLY}]
-			set ret [set data [read $fh]]
-			close $fh
-
-    }
-		
-		return $ret
+    if {$fname ne "" && [file exists $fname]} {
+							 set fh [open $fname {RDONLY}]
+							 set ret [set data [read $fh]]
+							 close $fh
+					}
+						
+		  return $ret
 	}
 
 # __________________________ saveFile _________________________ #

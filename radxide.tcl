@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.4.3" 
+set version "1.4.5" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -139,8 +139,8 @@ namespace eval radxide {
   set dan(fgbranch) "blue"    
   set dan(CHARFAMILY) "Sans"
   set dan(CHARSIZE) 10
-  set dan(MAXFILES) 1000
-  set dan(MAXFILESIZE) 65534
+  set dan(MAXFILES) 8000
+  set dan(MAXFILESIZE) 150000
   set dan(MAXFINDLENGTH) 50 
   set dan(TAB_IN_SPACE) "  "
    

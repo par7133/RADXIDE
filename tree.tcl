@@ -657,37 +657,53 @@ namespace eval tree {
 		  if {[set ID [$tree selection]] eq {}} return
 		}
 		lassign [$tree item $ID -values] -> fname isfile
-		if {$isfile && (![isBin $fname]) && (![isImage $fname])} {
-		  $dan(TEXT) config -state normal
-		  $dan(TEXT) delete 1.0 end 
-		  $dan(TEXT) insert 1.0 [::radxide::filelib::openFile $fname]
-		  ::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"
-			
-		  # Update menu
-	    $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state normal
-	    $menu(FILE) entryconfigure $menu(SAVE_AS_ENTRY_IDX) -state normal
-	    $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(UNDO_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(REDO_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(COPY_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state normal	
-	    $menu(EDIT) entryconfigure $menu(INDENT_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(UNINDENT_ENTRY_IDX) -state normal	    
-	    $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state normal
-	    $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state normal	    
-	    
-	    set project(CUR_FILE_PATH) $fname
-	    
-	    $dan(TEXT) edit reset
-	    
-	    focus $dan(TEXT)
-	    ::tk::TextSetCursor $dan(TEXT) @0,0
-	    
-	    ::radxide::main::updateAppTitle
-	    		  
-		  # after idle {alited::bar::BAR draw; alited::tree::UpdateFileTree}
-		}
+		if {![file exists $fname]} {
+		
+				tk_messageBox -title $dan(TITLE) -icon error -message "File doesn't exist!"
+	  	return		
+	  	
+	 }	 else {
+		
+		 	if {[file size $fname] > $dan(MAXFILESIZE)} {
+				  tk_messageBox -title $dan(TITLE) -icon error -message "File exceed MAXFILESIZE=$dan(MAXFILESIZE)"
+	  			return
+				 }
+		
+				if {$isfile && (![isBin $fname]) && (![isImage $fname])} {
+					 $dan(TEXT) config -state normal
+					 $dan(TEXT) delete 1.0 end 
+					 $dan(TEXT) insert 1.0 [::radxide::filelib::openFile $fname]
+					 ::radxide::win::fillGutter $dan(TEXT) $dan(GUTTEXT) 5 1 "#FFFFFF" "#222223"
+					
+					 # Update menu
+				  $menu(FILE) entryconfigure $menu(SAVE_ENTRY_IDX) -state normal
+				  $menu(FILE) entryconfigure $menu(SAVE_AS_ENTRY_IDX) -state normal
+				  $menu(FILE) entryconfigure $menu(CLOSE_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(UNDO_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(REDO_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(COPY_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(PASTE_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(CUT_ENTRY_IDX) -state normal	
+				  $menu(EDIT) entryconfigure $menu(INDENT_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(UNINDENT_ENTRY_IDX) -state normal	    
+				  $menu(EDIT) entryconfigure $menu(FIND_ENTRY_IDX) -state normal
+				  $menu(EDIT) entryconfigure $menu(GOTO_ENTRY_IDX) -state normal	    
+					
+				  set project(CUR_FILE_PATH) $fname
+					
+				  $dan(TEXT) edit reset
+					
+				  focus $dan(TEXT)
+				  ::tk::TextSetCursor $dan(TEXT) @0,0
+					
+				  ::radxide::main::updateAppTitle
+							  
+					 # after idle {alited::bar::BAR draw; alited::tree::UpdateFileTree}
+				 } else {	 
+ 			  tk_messageBox -title $dan(TITLE) -icon error -message "File is binary or a folder!"
+	  			return
+				 }
+		 }		
 	}
 
 
