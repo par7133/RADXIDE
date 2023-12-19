@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.4.5" 
+set version "1.4.6" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -189,12 +189,13 @@ namespace eval radxide {
   set menu(GOTO_ENTRY_IDX) 11;
   
   # a couplle of extension definitions..
-  set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .funny .inc}     ;# extensions of php files
-  set dan(HtmlExts) {.html .htm}                                  ;# extensions of html files
+  set dan(PhpExts) {.php .php2 .php3 .php4 .php5 .inc}            ;# extensions of php files
+  set dan(HtmlExts) {.html .htm .xml .xsl}                        ;# extensions of html files
   set dan(CssExts) {.css}                                         ;# extensions of css files
   set dan(JsExts) {.js}                                           ;# extensions of js files
   set dan(TxtExts) {.txt .rtf}                                    ;# extensions of txt files
-  set dan(ImgExts) {.gif .png .jpg .jpeg}                         ;# extensions of images
+  set dan(ImgExts) {.gif .png .jpg .jpeg .ico}                    ;# extensions of images
+  set dan(OfficeExts) {.doc .docx .xls .xlsx .ppt .pptx}          ;# extensions of office files
   set dan(BinExts) {.so .o .exe}                                  ;# extensions of binary
      
 # __________________ iswindows ___________________ #

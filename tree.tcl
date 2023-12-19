@@ -609,6 +609,18 @@ namespace eval tree {
 		return no
 	}
 
+# ________________________ isOfficeFile _________________________ #
+
+	proc isOfficeFile {fname} {
+		# Checks if a file is of isOfficeFile.
+		#   fname - file name
+
+		if {[string tolower [file extension $fname]] in $radxide::dan(OfficeExts)} {
+		  return yes
+		}
+		return no
+	}
+
 # ________________________ isPhp _________________________ #
 
 	proc isPhp {fname} {
@@ -669,7 +681,7 @@ namespace eval tree {
 	  			return
 				 }
 		
-				if {$isfile && (![isBin $fname]) && (![isImage $fname])} {
+				if {$isfile && (![isBin $fname]) && (![isOfficeFile $fname]) && (![isImage $fname])} {
 					 $dan(TEXT) config -state normal
 					 $dan(TEXT) delete 1.0 end 
 					 $dan(TEXT) insert 1.0 [::radxide::filelib::openFile $fname]
