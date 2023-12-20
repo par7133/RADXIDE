@@ -447,47 +447,89 @@ namespace eval tree {
 
 		namespace upvar ::radxide dan dan _dirtree _dirtree
 		incr lev
-		if {[catch {set dcont [lsort -dictionary [glob [file join $dirname *]]]}]} {
-		  set dcont [list]
+				
+		# firstly directories:
+		
+		if {[catch {set dcont [lsort -dictionary [glob -type d [file join $dirname *]]]}]} {
+			set dcont [list]
 		}
 		# firstly directories:
 		# 1. skip the ignored ones
 		for {set i [llength $dcont]} {$i} {} {
-		  incr i -1
-		  if {[ignoredDir [lindex $dcont $i]] || (($lev eq 1) && (([file tail [lindex $dcont $i]] ne "Private") && ([file tail [lindex $dcont $i]] ne "Public")))} {
-		    set dcont [lreplace $dcont $i $i]
-		  }
+			incr i -1
+			if {[ignoredDir [lindex $dcont $i]] || (($lev eq 1) && (([file tail [lindex $dcont $i]] ne "Private") && ([file tail [lindex $dcont $i]] ne "Public")))}  {
+				set dcont [lreplace $dcont $i $i]
+			}
 		}
 		# 2. put the directories to the beginning of the file list
 		set i 0
 		foreach fname $dcont {
-		  if {[file isdirectory $fname]} {
-		    set dcont [lreplace $dcont $i $i [list $fname "y"]]
-		    set nroot [addToDirContent $lev 0 $fname $iroot]
-		    if {[llength $_dirtree] < $dan(MAXFILES)} {
-		      dirContent $fname $lev $nroot $globs
-		    } else {
-		      break
-		    }
-		  } else {
-		    set dcont [lreplace $dcont $i $i [list $fname]]
-		  }
-		  incr i
-		}
+ 			if {[file isdirectory $fname]} {
+	 			set dcont [lreplace $dcont $i $i [list $fname "y"]]
+				set nroot [addToDirContent $lev 0 $fname $iroot]
+				if {[llength $_dirtree] < $dan(MAXFILES)} {
+					dirContent $fname $lev $nroot $globs
+				} else {
+					break
+				}
+			} else {
+				set dcont [lreplace $dcont $i $i [list $fname]]
+			}
+			incr i
+		}		
+
+		
 		# then files
+		
+		# hidden files
+		if {[catch {set dcont [lsort -dictionary [glob -types {f hidden} [file join $dirname *]]]}]} {
+		  set dcont [list]
+		}
+		for {set i [llength $dcont]} {$i} {} {
+		  incr i -1
+		  if {[ignoredDir [lindex $dcont $i]] && (!(([file tail [lindex $dcont $i]] ne ".") && ([file tail [lindex $dcont $i]] ne "..")))} {
+		    set dcont [lreplace $dcont $i $i]
+		     }
+		}
 		if {[llength $_dirtree] < $dan(MAXFILES)} {
 		  foreach fname $dcont {
 		    lassign $fname fname d
 		    if {$d ne "y"} {
+		      #tk_messageBox -title $dan(TITLE) -icon error -message $fname
 		      foreach gl [split $globs ","] {
 		        if {[string match $gl $fname]} {
 		          addToDirContent $lev 1 $fname $iroot
 		          break
-		        }
-		      }
-		    }
-		  }
+		                    }
+		               }
+		         }
+		     }
+		 }
+	 # generic files
+		if {[catch {set dcont [lsort -dictionary [glob -type f [file join $dirname *]]]}]} {
+		  set dcont [list]
 		}
+		for {set i [llength $dcont]} {$i} {} {
+		  incr i -1
+		  if {[ignoredDir [lindex $dcont $i]] && (!(([file tail [lindex $dcont $i]] ne ".") && ([file tail [lindex $dcont $i]] ne "..")))} {
+		    set dcont [lreplace $dcont $i $i]
+		     }
+		}
+		if {[llength $_dirtree] < $dan(MAXFILES)} {
+		  foreach fname $dcont {
+		    lassign $fname fname d
+		    if {$d ne "y"} {
+		      #tk_messageBox -title $dan(TITLE) -icon error -message $fname
+		      foreach gl [split $globs ","] {
+		        if {[string match $gl $fname]} {
+		          addToDirContent $lev 1 $fname $iroot
+		          break
+		                    }
+		               }
+		         }
+		     }
+		 }
+		 
 	}
 
 # ________________________ getDirectoryContent _________________________ #
