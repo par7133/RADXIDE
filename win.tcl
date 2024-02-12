@@ -909,6 +909,15 @@ namespace eval win {
     set oldval [$dan(GUTTEXT) yview]
     $dan(GUTTEXT) yview $dan(TOTLINES).0
     set dan(CUR_FILE_MAX_YVIEW) [lindex [$dan(GUTTEXT) yview] 0]
+    
+    # yyy
+    #set t .danwin.fra.pan.fra3.body.text
+    #$t config -state normal
+    #$t delete 1.0 end
+    #$t insert end $dan(CUR_FILE_MAX_YVIEW) 
+    #$t insert end ddd[expr {$dan(CUR_FILE_MAX_YVIEW) / $dan(TOTLINES)}]
+    # end yyy
+    
     #$dan(GUTTEXT) yview [lindex $oldval 1]
     $dan(GUTTEXT) yview moveto [lindex [$dan(TEXT) yview] 0] 
 
@@ -1921,11 +1930,11 @@ namespace eval win {
 
  		#.danwin.fra.pan.fra3.body.text delete 1.0 end
 		#.danwin.fra.pan.fra3.body.text insert end [expr [lindex $args 0]]
-    if {[expr [lindex $args 0]] > [expr $dan(CUR_FILE_MAX_YVIEW) - 0.01]} {
-      ::radxide::win::Yview $widgets no moveto [lindex $args 1]
-    } else {
+    #if {[expr [lindex $args 0]] > [expr $dan(CUR_FILE_MAX_YVIEW) - 0.01]} { ;#yyy
+    #  ::radxide::win::Yview $widgets no moveto [lindex $args 1]
+    #} else {
       ::radxide::win::Yview $widgets no moveto [lindex $args 0]
-    }
+    #}
 
   }
   
@@ -4206,4 +4215,3 @@ namespace eval win {
 # ________________________ #
 
 }
-
