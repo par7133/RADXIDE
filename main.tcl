@@ -71,7 +71,7 @@ namespace eval main {
 		wm minsize $dan(WIN) [expr $dan(WIDTH)-600] [expr $dan(HEIGHT)-600]
 		wm maxsize $dan(WIN) [expr $dan(WIDTH)+400] [expr $dan(HEIGHT)+300]
 		wm attributes $dan(WIN) -fullscreen 0
-		wm protocol . WM_DELETE_WINDOW { radxide::quit }
+		wm protocol $dan(WIN) WM_DELETE_WINDOW { radxide::quit }
     
     catch {focus -force $dan(TEXT)}
     

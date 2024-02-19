@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.4.8" 
+set version "1.5.0" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -215,8 +215,17 @@ namespace eval radxide {
     #   w - not used
     #   res - result of running of main window
     #   ask - if "yes", requests the confirmation of the exit
-
-    exit 0;
+    
+    set answer [tk_messageBox -message "Really quit RADXIDE?" \
+        -icon question -type yesno \
+        -detail "Select \"Yes\" to make the application exit"]
+        
+    switch -- $answer {
+       yes exit 0
+       no
+    }    
+    
+    return
   }
 
 # __________________ raise_window ___________________ #
