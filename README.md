@@ -1,5 +1,4 @@
 # RADXIDE
-One more IDE but thought for RAD.
 
 <br>
 Originally envisioned for RAD development in PHP...
