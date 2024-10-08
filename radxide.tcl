@@ -2,7 +2,7 @@
 ###########################################################
 # Name:    radxide.tcl
 # Author:  Daniele Bonini  (posta@elettronica.lol)
-# Date:    05/12/2023
+# Date:    08/10/2024
 # Desc:    Bootstrap file of RadXIDE.
 #
 #          Bootstrap file and most of the code 
@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.5.1" 
+set version "1.5.2" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
