@@ -493,7 +493,13 @@ namespace eval tree {
 		}
 		if {[llength $_dirtree] < $dan(MAXFILES)} {
 		  foreach fname $dcont {
-		    lassign $fname fname d
+                    lassign $fname fnamenan d
+                    if {$d ne "y"} {
+                      set d " "
+                    }
+                    #set d " " 
+                    set fname [string map {"\"" "\'"} $fname] 
+		    #lassign $fname fname d
 		    if {$d ne "y"} {
 		      #tk_messageBox -title $dan(TITLE) -icon error -message $fname
 		      foreach gl [split $globs ","] {
