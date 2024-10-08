@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.5.2" 
+set version "1.5.3" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
