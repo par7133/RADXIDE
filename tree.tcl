@@ -1,7 +1,7 @@
 ###########################################################
 # Name:    tree.tcl
 # Author:  Daniele Bonini  (posta@elettronica.lol)
-# Date:    05/12/2023
+# Date:    08/10/2024
 # Desc:    Tree namespace of RadXIDE.
 #
 #          Tree namespace and most of the code 
@@ -517,7 +517,11 @@ namespace eval tree {
 		}
 		if {[llength $_dirtree] < $dan(MAXFILES)} {
 		  foreach fname $dcont {
-		    set d " " 
+		    lassign $fname fnamenan d
+                    if {$d ne "y"} {
+                      set d " "
+                    }
+                    #set d " "
                     set fname [string map {"\"" "\'"} $fname] 
                     #lassign $fname fname d
 		    if {$d ne "y"} {
