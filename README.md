@@ -1,7 +1,7 @@
 # RADXIDE
 
 <br>
-Originally envisioned for RAD development in PHP...
+Envisioned for RAD development in PHP..
 <br><br>
 RADXIDE checks for the existance of the Working Dir
 in /home/YourUser/.radxwork.
