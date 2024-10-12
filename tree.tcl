@@ -464,10 +464,8 @@ namespace eval tree {
 		# 2. put the directories to the beginning of the file list
 		set i 0
 		foreach fname $dcont {
-                    set start [expr [string length $fname]-2]
-                    set last [expr [string length $fname]-1]
-                    set d [string range $fname $start $last]
-		    if {$d ne " y"} {
+                    set d [string range $fname end-1 end]
+                    if {$d ne " y"} {
  			if {[file isdirectory $fname]} {
 	 			set dcont [lreplace $dcont $i $i [list $fname "y"]]
 				set nroot [addToDirContent $lev 0 $fname $iroot]
@@ -498,11 +496,9 @@ namespace eval tree {
 		}
 		if {[llength $_dirtree] < $dan(MAXFILES)} {
 		  foreach fname $dcont {
-                    set fname [string map {"\"" "\'"} $fname] 
-                    set start [expr [string length $fname]-2]
-                    set last [expr [string length $fname]-1]
-                    set d [string range $fname $start $last]
-		    #lassign $fname fname d
+                    #set fname [string map {"\"" "\'"} $fname] 
+                    set d [string range $fname end-1 end]
+		    ##lassign $fname fname d
 		    if {$d ne " y"} {
 		      #tk_messageBox -title $dan(TITLE) -icon error -message $fname
 		      foreach gl [split $globs ","] {
@@ -526,10 +522,8 @@ namespace eval tree {
 		}
 		if {[llength $_dirtree] < $dan(MAXFILES)} {
 		  foreach fname $dcont {
-                    set fname [string map {"\"" "\'"} $fname] 
-                    set start [expr [string length $fname]-2]
-                    set last [expr [string length $fname]-1]
-                    set d [string range $fname $start $last]
+                    #set fname [string map {"\"" "\'"} $fname] 
+                    set d [string range $fname end-1 end] 
                     #lassign $fname fname d
 		    if {$d ne " y"} {
 		      #tk_messageBox -title $dan(TITLE) -icon error -message $fname
