@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.5.5" 
+set version "1.5.6" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -116,7 +116,8 @@ namespace eval radxide {
   variable DIR [file dirname $FILEDIR]
 
   # directories of sources
-  variable SRCDIR [file join $DIR src]
+  #variable SRCDIR [file join $DIR src]
+  variable SRCDIR $FILEDIR
   variable LIBDIR [file join $DIR lib]
   variable ICONDIR [file join $SRCDIR icons]
   
