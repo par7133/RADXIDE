@@ -66,4 +66,4 @@ Tcler's Wiki (original excerpts.)
 
 ![RADXIDE in action #1](/res/screenshot1.png)<br><br><br>
 
-Feedback: <a href="mailto:posta@elettronica.lol">posta@elettronica.lol</a>
+Feedback: <a href="mailto:code@gaox.io">code@gaox.io</a>
