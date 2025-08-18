@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.5.6" 
+set version "1.5.8" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version
@@ -67,6 +67,8 @@ namespace eval radxide {
      exit 0
   }   
   
+  # To restore at deployment time..
+  #
   set dan(WORKDIR) "$userhome/.radxwork"  ;# working dir
   
   # Check workdir existance..
@@ -217,9 +219,12 @@ namespace eval radxide {
     #   res - result of running of main window
     #   ask - if "yes", requests the confirmation of the exit
     
+    namespace upvar ::radxide dan dan
+
     set answer [tk_messageBox -message "Really quit RADXIDE?" \
         -icon question -type yesno \
-        -detail "Select \"Yes\" to make the application exit"]
+        -detail "Select \"Yes\" to make the application exit" \
+        -parent $dan(WIN)]
         
     switch -- $answer {
        yes exit 0
@@ -285,7 +290,7 @@ if {[catch {set res [radxide::main::_run]} err]} {
   set msg "\nERROR in radxide:"
   puts \n$msg\n\n$::errorInfo\n
   set msg "$msg\n\n$err\n\nPlease, inform authors.\nDetails are in stdout."
-  tk_messageBox -title $dan(TITLE) -icon error -message $msg
+  tk_messageBox -title $dan(TITLE) -icon error -message $msg -parent $dan(WIN)
   exit 2
 }
 

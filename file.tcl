@@ -148,14 +148,14 @@ namespace eval file {
 				{{Project Files}    {.radx}       }
 				{{All Files}        *             }
 		}
-		set oriprojectpath [tk_getSaveFile -initialdir $dan(WORKDIR) -filetypes $types]
+		set oriprojectpath [tk_getSaveFile -initialdir $dan(WORKDIR) -filetypes $types -parent $dan(WIN)]
 
 		if {$oriprojectpath ne ""} {
 		
 		  # Check: Parent path must equal to Working Dir..
 		  if {[string range $oriprojectpath 0 [expr [string last "/" $oriprojectpath]-1]] ne $dan(WORKDIR)} {
 			
-        tk_messageBox -title $dan(TITLE) -icon error -message "Project must be inside the Working Dir!"			
+        tk_messageBox -title $dan(TITLE) -icon error -message "Project must be inside the Working Dir!"	-parent $dan(WIN)		
 			  return
 			  
 			}
@@ -177,7 +177,7 @@ namespace eval file {
 		  # Check: Project existance..
 		  if {[file exists $oriprojectpath] || [file exists $project(PATH)]} {
 			
-        tk_messageBox -title $dan(TITLE) -icon error -message "Project already exists!"			
+        tk_messageBox -title $dan(TITLE) -icon error -message "Project already exists!"	-parent $dan(WIN)		
 			  return
 			  
 			}
@@ -218,14 +218,14 @@ namespace eval file {
 				{{Project Files}    {.radx}       }
 				{{All Files}        *             }
 		}
-		set oriprojectpath [tk_getOpenFile -initialdir $dan(WORKDIR) -filetypes $types]
+		set oriprojectpath [tk_getOpenFile -initialdir $dan(WORKDIR) -filetypes $types -parent $dan(WIN)]
 
 		if {$oriprojectpath ne ""} {
 		
 		  # Check: Parent path must equal to Working Dir..
 		  if {[string range $oriprojectpath 0 [expr [string last "/" $oriprojectpath]-1]] ne $dan(WORKDIR)} {
 			
-        tk_messageBox -title $dan(TITLE) -icon error -message "Project must be inside the Working Dir!"			
+        tk_messageBox -title $dan(TITLE) -icon error -message "Project must be inside the Working Dir!"	-parent $dan(WIN)	
 			  return
 			  
 			}
@@ -244,7 +244,7 @@ namespace eval file {
 			#project_root=/home/pocahontas/.radxwork/Pippo
 			
 			if [catch {open $oriprojectpath} in] {
-	      tk_messageBox -title $dan(TITLE) -icon error -message "Cannot open $projectname."
+	      tk_messageBox -title $dan(TITLE) -icon error -message "Cannot open $projectname." -parent $dan(WIN)
       	return
       }   
       set project(ROOT) ""
@@ -303,14 +303,14 @@ namespace eval file {
 										{{INC Files}        {.inc}        }
 										{{All Files}        *             }
 								}
-								set orifilepath [tk_getSaveFile -initialdir $initialdir -initialfile $initialfile -filetypes $types -defaultextension .php]
+								set orifilepath [tk_getSaveFile -initialdir $initialdir -initialfile $initialfile -filetypes $types -defaultextension .php -parent $dan(WIN).fra]
 								
 								if {$orifilepath eq ""} {return}
 								
 								# Check: Parent path must equal to Working Dir..
 								if {([string first $project(ROOT)/Private $orifilepath] eq -1) && ([string first $project(ROOT)/Public $orifilepath] eq -1)} {
 								
-			      tk_messageBox -title $dan(TITLE) -icon error -message "File must be saved inside a valid destination in the Working Dir ($project(ROOT)) !"			
+			      tk_messageBox -title $dan(TITLE) -icon error -message "File must be saved inside a valid destination in the Working Dir ($project(ROOT)) !"	-parent $dan(WIN).fr		
 										return
 								}			
 			
@@ -325,7 +325,7 @@ namespace eval file {
 		  set stxt [string trim [$t get 1.0 end]]
 	    
 	   if {![file writable $fname]} { 
-      tk_messageBox -title $dan(TITLE) -icon error -message "File not writable!"			
+      tk_messageBox -title $dan(TITLE) -icon error -message "File not writable!" -parent $dan(WIN)			
 	   } else {
   		   ::radxide::filelib::saveFile $fname $stxt
   		    }

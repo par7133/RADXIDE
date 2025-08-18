@@ -720,13 +720,13 @@ namespace eval tree {
 		lassign [$tree item $ID -values] -> fname isfile
 		if {![file exists $fname]} {
 		
-				tk_messageBox -title $dan(TITLE) -icon error -message "File doesn't exist!"
+				tk_messageBox -title $dan(TITLE) -icon error -message "File doesn't exist!" -parent $dan(WIN)
 	  	return		
 	  	
 	 }	 else {
 		
 		 	if {[file size $fname] > $dan(MAXFILESIZE)} {
-				  tk_messageBox -title $dan(TITLE) -icon error -message "File exceed MAXFILESIZE=$dan(MAXFILESIZE)"
+				  tk_messageBox -title $dan(TITLE) -icon error -message "File exceed MAXFILESIZE=$dan(MAXFILESIZE)" -parent $dan(WIN)
 	  			return
 				 }
 		
@@ -761,7 +761,7 @@ namespace eval tree {
 							  
 					 # after idle {alited::bar::BAR draw; alited::tree::UpdateFileTree}
 				 } else {	 
- 			  tk_messageBox -title $dan(TITLE) -icon error -message "File is binary or a folder!"
+ 			  tk_messageBox -title $dan(TITLE) -icon error -message "File is binary or a folder!" -parent $dan(WIN)
 	  			return
 				 }
 		 }		

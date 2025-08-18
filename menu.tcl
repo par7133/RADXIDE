@@ -64,7 +64,7 @@ namespace eval menu {
 		$m2 add separator
 		$m2 add command -label Options -command { ::radxide::menu::edit::setup } 
 		set m3 [menu $m.help -tearoff 0]
-		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver $version\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n2018-2021 Tcler's Wiki\n\nhttps://5mode.com\n\n___________________________________\n\nWork dir:\n$dan(WORKDIR)\n\nOS: $os\n\n\n"}
+		$m3 add command -label About -command { tk_messageBox -title $dan(TITLE) -icon info -message "\n\nRADXIDE ver $version\n\n\nMIT Licence.\n\n\nCopyright (c) 5 Mode\n\nThis software is provided AS-IS.\n\nAuthors:\n2023-2024 RADXIDE, Daniele Bonini\n2021-2023 Alited, Alex Plotnikov\n2018-2021 Tcler's Wiki\n\nhttps://5mode.com\n\n___________________________________\n\nWork dir:\n$dan(WORKDIR)\n\nOS: $os\n\n\n" -parent $dan(WIN)}
     return $m
 	}
 

@@ -317,7 +317,7 @@ namespace eval edit {
     
     namespace upvar ::radxide dan dan
     
-    tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' to customize any variable."   
+    tk_messageBox -title $dan(TITLE) -icon info -message "Please check 'radxide.tcl' to customize any variable." -parent $dan(WIN)  
 	}
 
 # ________________________ UnIndent _________________________ #
