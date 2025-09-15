@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    edit.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    27/11/2023
 # Desc:    Edit Menu namespace of RadXIDE.
 #

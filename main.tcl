@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    main.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    25/11/2023
 # Desc:    Main namespace of RadXIDE.
 #

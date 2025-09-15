@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    win.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    26/11/2023
 # Desc:    Win namespace of RadXIDE.
 #

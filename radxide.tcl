@@ -1,7 +1,7 @@
 #! /usr/bin/env tclsh
 ###########################################################
 # Name:    radxide.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    08/10/2024
 # Desc:    Bootstrap file of RadXIDE.
 #
@@ -28,7 +28,7 @@
 #
 ###########################################################
 
-set version "1.5.8" 
+set version "1.5.9" 
 set os "$::tcl_platform(os) $::tcl_platform(osVersion)"
 
 package provide radxide $version

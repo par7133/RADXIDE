@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    tree.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    08/10/2024
 # Desc:    Tree namespace of RadXIDE.
 #

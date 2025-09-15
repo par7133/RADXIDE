@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    eglib.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    05/12/2023
 # Desc:    Code library code. 
 #

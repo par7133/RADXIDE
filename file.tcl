@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    file.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    27/11/2023
 # Desc:    File Menu namespace of RadXIDE.
 #

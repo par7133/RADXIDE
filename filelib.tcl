@@ -1,6 +1,6 @@
 ###########################################################
 # Name:    filelib.tcl
-# Author:  Daniele Bonini  (posta@elettronica.lol)
+# Author:  Daniele Bonini  (code@gaox.io)
 # Date:    01/12/2023
 # Desc:    Filelib namespace of RadXIDE.
 #
