@@ -13,7 +13,7 @@
 #          and the contributors to RADXIDE have no 
 #          knowledge about.
 #
-# License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)
+# License: MIT. Copyrights NuMode (Last implementation and adaptations.)
 #               Copyrights © 2003 Pearson Education Inc. (original excerpts.)  
 #
 ###########################################################
