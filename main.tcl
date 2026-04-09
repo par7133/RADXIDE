@@ -13,7 +13,7 @@
 #          and the contributors to this RadXIDE have no 
 #          knowledge about.
 #
-# License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)
+# License: MIT. Copyrights NuMode (Last implementation and adaptations.)
 #               Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
 ###########################################################
 
