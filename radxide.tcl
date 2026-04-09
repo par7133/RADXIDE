@@ -23,7 +23,7 @@
 #          knowledge about. For the related copyright notice
 #          refer <eglib.tcl> part of this software.
 #
-# License: MIT. Copyrights 5 Mode (Last implementation and adaptations.)
+# License: MIT. Copyrights NuMode (Last implementation and adaptations.)
 #               Copyright (c) 2021-2023 Alex Plotnikov https://aplsimple.github.io (original scaffolding and excerpts.)
 #
 ###########################################################
