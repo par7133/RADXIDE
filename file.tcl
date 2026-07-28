@@ -164,8 +164,8 @@ namespace eval file {
 			set projectpath $oriprojectpath
 			
 			set projectname [string range $projectpath [expr [string last "/" $projectpath]+1] end]
-			set projectname [string tolower $projectname] 
-			set projectname [string totitle $projectname]
+			#set projectname [string tolower $projectname] 
+			#set projectname [string totitle $projectname]
 			set projectname [string map {.radx ""} $projectname]
 			set project(NAME) $projectname
 			
